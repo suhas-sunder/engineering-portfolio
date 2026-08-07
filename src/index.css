@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=M+PLUS+Rounded+1c:wght@500&family=Montserrat:wght@500&family=Source+Sans+Pro&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", "Source Sans Pro", Georgia, "Times New Roman",
+    Times, serif;
+  min-width: 0;
+}
+
+#root {
+  min-width: 0;
+}
+
+img {
+  max-width: 100%;
+}

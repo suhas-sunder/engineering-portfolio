@@ -1,0 +1,144 @@
+.header {
+  display: block;
+  width: 100%;
+  padding: 5rem 0 5rem 0;
+  background-color: rgba(18, 23, 35, 255);
+  margin-bottom: 4rem;
+}
+
+.header-container,
+.proj-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  padding: 0 1.5rem;
+  color: white;
+  margin: auto;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 2.5rem;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.img-link {
+  display: block;
+  position: relative;
+  margin: 1.5rem auto 2.5rem auto;
+  max-width: 800px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.overlay {
+  display: flex;
+  position: absolute;
+  gap: 1rem;
+  font-size: 1.3rem;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  color: transparent;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.link-text {
+  font-size: 1.5rem;
+}
+
+.overlay:hover {
+  background-color: rgb(0, 0, 0, 0.75);
+  color: yellow;
+}
+
+.img {
+  display: block;
+  width: 100%;
+}
+
+.proj-details {
+  color: black;
+  align-items: flex-start;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0 0 0;
+  font-size: 1.5rem;
+  background-color: rgba(18, 23, 35, 255);
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 700px;
+  width: 100%;
+  color: white;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  gap: 0.8rem;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-left:hover,
+.nav-right:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
+.arrow-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+@media (max-width: 520px) {
+  .nav-left,
+  .nav-right {
+    font-size: 1rem;
+    line-height: 1rem;
+    padding: 1rem 0 1rem 1rem;
+  }
+
+  .nav-right {
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .nav-proj-name {
+    /* display: none; */
+    font-size: 0.65rem;
+  }
+}

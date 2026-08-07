@@ -1,0 +1,133 @@
+.background {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: 90;
+}
+
+.background:hover {
+  cursor: pointer;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(18, 23, 35, 255);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  padding: 3rem;
+  border-radius: 15px;
+  color: white;
+  z-index: 100;
+  border: 10px solid rgba(255, 255, 255, 0.9);
+}
+
+.img {
+  display: block;
+  width: 100%;
+  background-color: white;
+  max-width: 300px;
+  border-radius: 15px;
+  margin: auto;
+}
+
+.close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  background-color: yellow;
+  padding: 1.2rem;
+  color: rgba(29, 36, 48, 255);
+  border: 3px solid rgba(29, 36, 48, 255);
+  border-radius: 10px;
+  top: 0.7rem;
+  right: 0.7rem;
+  font-size: 1.8rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.sub-title {
+  font-size: 1.4rem;
+  margin: 2rem 0;
+  line-height: 2rem;
+}
+
+.details {
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+.details:last-of-type {
+  padding-bottom: 1.5rem;
+}
+
+.close-btn:hover {
+  cursor: pointer;
+  background-color: rgba(29, 36, 48, 255);
+  border: 3px solid yellow;
+  color: yellow;
+}
+
+.button-bkgd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(29, 36, 48, 255);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: calc(100% - 2rem);
+    text-align: center;
+    padding: 2.5rem;
+  }
+
+  .img {
+    max-width: 200px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .sub-title {
+    display: none;
+  }
+
+  .details {
+    font-size: 1rem;
+    line-height: 2rem;
+    margin-bottom: 0;
+  }
+
+  .close-btn {
+    padding: 0.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.3rem;
+  }
+
+  .button-bkgd {
+    padding: 1.2rem;
+  }
+}
