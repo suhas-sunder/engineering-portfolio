@@ -22,7 +22,7 @@ function App() {
     url: siteConfig.url,
     email: `mailto:${siteConfig.email}`,
     telephone: siteConfig.phoneDisplay,
-    jobTitle: "Engineer-in-Training",
+    jobTitle: "Engineer-in-Training (EGBC)",
     homeLocation: {
       "@type": "Place",
       name: "Toronto, Ontario, Canada",
@@ -42,7 +42,7 @@ function App() {
     ],
     hasCredential: {
       "@type": "EducationalOccupationalCredential",
-      name: "Engineer-in-Training",
+      name: "Engineer-in-Training (EGBC)",
       recognizedBy: {
         "@type": "Organization",
         name: "Engineers and Geoscientists BC",
@@ -60,7 +60,7 @@ function App() {
         <meta name="description" content={siteConfig.description} />
         <meta
           name="keywords"
-          content="Suhas Sunder, Engineer-in-Training, electrical engineering, computer engineering, MATLAB, Simulink, engineering portfolio"
+          content="Suhas Sunder, Engineer-in-Training EGBC, electrical engineering, power systems, MATLAB, Simulink, engineering portfolio"
         />
         <link rel="canonical" href={siteConfig.url} />
         <meta property="og:type" content="website" />

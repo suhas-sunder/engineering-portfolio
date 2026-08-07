@@ -164,7 +164,7 @@ function Contact() {
             number="06 / 06"
             eyebrow="Contact"
             title="Start a conversation"
-            description="For electrical engineering, infrastructure, industrial, electrification, and early-career project-delivery opportunities in British Columbia."
+            description="For electrical engineering, infrastructure, industrial, electrification, and early-career project-delivery opportunities across Canada and the United States."
           />
         </div>
 
@@ -180,9 +180,9 @@ function Contact() {
                 aria-hidden="true"
               />
               <span>
-                Toronto, ON
+                {siteConfig.location}
                 <br />
-                Relocating to Vancouver, BC
+                {siteConfig.mobility}
               </span>
             </p>
 

@@ -54,7 +54,7 @@ export default function MobileNav() {
               Suhas Sunder
             </span>
             <span className="block text-[0.62rem] font-bold uppercase tracking-[0.13em] text-teal-700 max-[359px]:hidden">
-              EIT · Electrical Engineering
+              Engineer-in-Training (EGBC)
             </span>
           </span>
         </Link>

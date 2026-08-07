@@ -36,6 +36,13 @@ describe("primary navigation", () => {
     );
   });
 
+  it("identifies the professional designation with the regulator", () => {
+    renderNavBar();
+    expect(
+      screen.getAllByText(/^engineer-in-training \(egbc\)$/i),
+    ).toHaveLength(2);
+  });
+
   it("shows the resume control as pending without a legacy link", () => {
     renderNavBar();
     expect(

@@ -44,51 +44,52 @@ function Home() {
               />
             </div>
             <figcaption className="flex items-start justify-between gap-4 border-x border-b border-slate-300 bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-              <span>Electrical & computer engineering</span>
-              <span className="whitespace-nowrap text-teal-700">EIT · BC</span>
+              <span>Engineering portfolio</span>
+              <span className="whitespace-nowrap text-teal-700">
+                EIT · EGBC
+              </span>
             </figcaption>
           </figure>
 
           <div className="order-1 min-w-0 lg:order-2">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex min-h-8 items-center border border-teal-700 bg-teal-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-800">
-                Engineer-in-Training
-              </span>
-              <span className="text-sm font-semibold text-slate-600">
-                Engineers and Geoscientists BC
-              </span>
-            </div>
-
-            <h1 className="mt-7 text-[clamp(2.7rem,7.5vw,5.8rem)] font-semibold leading-[0.92] tracking-[-0.055em] text-slate-950">
+            <h1 className="text-[clamp(2.7rem,7.5vw,5.8rem)] font-semibold leading-[0.92] tracking-[-0.055em] text-slate-950">
               Suhas Sunder
             </h1>
 
             <p className="mt-6 max-w-4xl text-[clamp(1.25rem,2.2vw,2rem)] font-medium leading-tight tracking-[-0.025em] text-slate-700">
-              Electrical & Computer Engineering
+              ENGINEER-IN-TRAINING (EGBC)
+            </p>
+
+            <p className="mt-4 max-w-4xl text-base font-semibold leading-7 text-teal-800 sm:text-lg">
+              Electrical Engineering • Power Systems • Technical Project
+              Delivery
             </p>
 
             <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-              MEng graduate and registered EIT bringing approximately three
-              years of professional software development and technical
-              project-delivery experience. Graduate studies renewed a focused
-              commitment to electrical engineering and a long-term path toward
-              P.Eng. licensure.
+              Registered with Engineers and Geoscientists BC and recently
+              completed an MEng in Electrical and Computer Engineering. Brings
+              approximately three years of professional technical experience
+              across software development and project delivery while
+              deliberately pursuing a long-term engineering career and P.Eng.
+              licensure.
             </p>
 
-            <p className="mt-5 flex items-start gap-3 text-sm font-semibold text-slate-700 sm:text-base">
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                className="mt-1 text-teal-700"
-                aria-hidden="true"
-              />
-              <span>
-                {siteConfig.location}
-                <span className="mx-2 text-slate-400" aria-hidden="true">
-                  →
-                </span>
-                {siteConfig.relocation}
-              </span>
-            </p>
+            <div className="mt-5 text-slate-700">
+              <p className="flex items-start gap-3 text-sm font-semibold sm:text-base">
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="mt-1 text-teal-700"
+                  aria-hidden="true"
+                />
+                <span>{siteConfig.location}</span>
+              </p>
+              <p className="mt-3 max-w-4xl text-sm font-semibold leading-6 sm:text-base">
+                {siteConfig.availability}
+              </p>
+              <p className="mt-2 text-sm font-medium text-slate-600">
+                {siteConfig.driverLicence}
+              </p>
+            </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ResumeLink />
@@ -132,32 +133,6 @@ function Home() {
               </a>
             </div>
 
-            <dl className="mt-10 grid border-y border-slate-300 sm:grid-cols-3">
-              <div className="py-4 sm:pr-5">
-                <dt className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-slate-500">
-                  Registration
-                </dt>
-                <dd className="mt-2 text-sm font-semibold leading-6 text-slate-900">
-                  EIT · Engineers and Geoscientists BC
-                </dd>
-              </div>
-              <div className="border-t border-slate-300 py-4 sm:border-l sm:border-t-0 sm:px-5">
-                <dt className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-slate-500">
-                  Graduate degree
-                </dt>
-                <dd className="mt-2 text-sm font-semibold leading-6 text-slate-900">
-                  MEng · Electrical & Computer Engineering
-                </dd>
-              </div>
-              <div className="border-t border-slate-300 py-4 sm:border-l sm:border-t-0 sm:pl-5">
-                <dt className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-slate-500">
-                  Career direction
-                </dt>
-                <dd className="mt-2 text-sm font-semibold leading-6 text-slate-900">
-                  Long-term engineering practice and P.Eng. licensure
-                </dd>
-              </div>
-            </dl>
           </div>
         </div>
       </header>

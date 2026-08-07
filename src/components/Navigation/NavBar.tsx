@@ -26,7 +26,7 @@ export default function NavBar() {
                 Suhas Sunder
               </span>
               <span className="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-teal-700">
-                Engineer-in-Training
+                Engineer-in-Training (EGBC)
               </span>
             </span>
           </Link>

@@ -24,7 +24,7 @@ export default function Education() {
               Professional credential
             </p>
             <h3 className="mt-5 text-3xl font-semibold tracking-tight text-slate-950">
-              Engineer-in-Training
+              Engineer-in-Training (EGBC)
             </h3>
             <p className="mt-3 text-base font-semibold leading-7 text-slate-700">
               Engineers and Geoscientists BC

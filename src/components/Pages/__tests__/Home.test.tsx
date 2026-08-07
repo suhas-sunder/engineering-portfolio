@@ -15,12 +15,33 @@ describe("engineering portfolio home", () => {
   beforeEach(renderHome);
 
   it("renders the engineering-first hero", () => {
+    const hero = screen.getByRole("banner");
+
     expect(
       screen.getByRole("heading", { name: /suhas sunder/i, level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/electrical & computer engineering/i).length).toBeGreaterThan(0);
     expect(
-      within(screen.getByRole("banner")).queryByText(/software developer/i),
+      within(hero).getByText(/^engineer-in-training \(egbc\)$/i),
+    ).toBeInTheDocument();
+    expect(
+      within(hero).getByText(
+        /electrical engineering\s*•\s*power systems\s*•\s*technical project delivery/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(hero).getByText(
+        /open to relocation across canada & the u\.s\. • open to travel • on-site & hybrid/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(hero).getByText(/valid canadian driver’s licence/i),
+    ).toBeInTheDocument();
+    expect(
+      within(hero).queryByText(/^electrical & computer engineering$/i),
+    ).not.toBeInTheDocument();
+    expect(within(hero).queryByText(/relocating to vancouver/i)).not.toBeInTheDocument();
+    expect(
+      within(hero).queryByText(/software developer/i),
     ).not.toBeInTheDocument();
   });
 
