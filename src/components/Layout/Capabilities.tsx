@@ -53,11 +53,10 @@ export default function Capabilities() {
         </div>
 
         <p className="mt-6 max-w-4xl border-l-2 border-teal-700 pl-4 text-sm leading-6 text-slate-600">
-          Career interests include power systems and electrical infrastructure,
-          protection and control, substations, nuclear and industrial electrical
-          engineering, electrification, EV infrastructure, and early-career
-          engineering project coordination. These are target directions—not
-          claims of professional practice experience.
+          Capabilities reflect demonstrated academic project work and
+          transferable professional experience. Individual projects provide
+          specific technical context without defining a single career
+          specialization.
         </p>
       </div>
     </section>

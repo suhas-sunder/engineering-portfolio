@@ -164,7 +164,7 @@ function Contact() {
             number="06 / 06"
             eyebrow="Contact"
             title="Start a conversation"
-            description="For electrical engineering, infrastructure, industrial, electrification, and early-career project-delivery opportunities across Canada and the United States."
+            description="Available for early-career engineering and EIT roles across Canada and the United States, with flexibility for travel, on-site, and hybrid work."
           />
         </div>
 

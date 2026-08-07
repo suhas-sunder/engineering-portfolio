@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Suhas Sunder",
-  title: "Electrical Engineering Portfolio",
+  title: "Engineering Portfolio",
   description:
-    "Engineering portfolio of Suhas Sunder, Engineer-in-Training registered with Engineers and Geoscientists BC, featuring electrical engineering projects, engineering analysis, MATLAB/Simulink modelling, project planning, and professional technical-delivery experience.",
+    "Engineering portfolio of Suhas Sunder, Engineer-in-Training registered with Engineers and Geoscientists BC, featuring engineering analysis, systems modelling, technical projects, project delivery, and professional technical experience.",
   url: "https://suhassunder.ca",
   email: "suhas@live.ca",
   phoneDisplay: "(647) 242-2969",
@@ -11,8 +11,8 @@ export const siteConfig = {
   location: "Toronto, ON",
   mobility: "Open to relocation across Canada & the U.S.",
   availability:
-    "Open to relocation across Canada & the U.S. • Open to travel • On-site & hybrid",
-  driverLicence: "Valid Canadian driver’s licence",
+    "Open to relocation across Canada & the U.S. | Open to travel | On-site & hybrid",
+  driverLicence: "Valid Canadian driver's licence",
 
   // TODO: Replace null with the verified engineering-resume PDF URL or an
   // imported engineering-resume asset. Do not point this at the legacy

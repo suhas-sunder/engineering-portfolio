@@ -33,12 +33,13 @@ function App() {
       name: "Ontario Tech University",
     },
     knowsAbout: [
-      "Electrical and computer engineering",
-      "MATLAB and Simulink modelling",
-      "Electric vehicle systems",
-      "Embedded systems",
+      "Engineering analysis",
+      "Systems modelling",
+      "Requirements analysis",
+      "Testing and troubleshooting",
+      "Technical documentation",
       "Engineering project planning",
-      "Technical software delivery",
+      "Software development and technical project delivery",
     ],
     hasCredential: {
       "@type": "EducationalOccupationalCredential",
@@ -56,18 +57,18 @@ function App() {
         <html lang="en" />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Suhas Sunder | Electrical Engineering Portfolio</title>
+        <title>Suhas Sunder | Engineering Portfolio</title>
         <meta name="description" content={siteConfig.description} />
         <meta
           name="keywords"
-          content="Suhas Sunder, Engineer-in-Training EGBC, electrical engineering, power systems, MATLAB, Simulink, engineering portfolio"
+          content="Suhas Sunder, Engineer-in-Training EGBC, engineering analysis, systems modelling, technical project delivery, engineering portfolio"
         />
         <link rel="canonical" href={siteConfig.url} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={siteConfig.name} />
         <meta
           property="og:title"
-          content="Suhas Sunder | Electrical Engineering Portfolio"
+          content="Suhas Sunder | Engineering Portfolio"
         />
         <meta property="og:description" content={siteConfig.description} />
         <meta property="og:url" content={siteConfig.url} />
@@ -75,7 +76,7 @@ function App() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Suhas Sunder | Electrical Engineering Portfolio"
+          content="Suhas Sunder | Engineering Portfolio"
         />
         <meta name="twitter:description" content={siteConfig.description} />
         <meta name="twitter:image" content={`${siteConfig.url}/og.png`} />

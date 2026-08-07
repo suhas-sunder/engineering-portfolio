@@ -25,20 +25,21 @@ describe("engineering portfolio home", () => {
     ).toBeInTheDocument();
     expect(
       within(hero).getByText(
-        /electrical engineering\s*•\s*power systems\s*•\s*technical project delivery/i,
+        /engineering analysis\s*\|\s*systems thinking\s*\|\s*technical project delivery/i,
       ),
     ).toBeInTheDocument();
     expect(
       within(hero).getByText(
-        /open to relocation across canada & the u\.s\. • open to travel • on-site & hybrid/i,
+        /open to relocation across canada & the u\.s\. \| open to travel \| on-site & hybrid/i,
       ),
     ).toBeInTheDocument();
     expect(
-      within(hero).getByText(/valid canadian driver’s licence/i),
+      within(hero).getByText(/valid canadian driver's licence/i),
     ).toBeInTheDocument();
     expect(
       within(hero).queryByText(/^electrical & computer engineering$/i),
     ).not.toBeInTheDocument();
+    expect(within(hero).queryByText(/power systems/i)).not.toBeInTheDocument();
     expect(within(hero).queryByText(/relocating to vancouver/i)).not.toBeInTheDocument();
     expect(
       within(hero).queryByText(/software developer/i),

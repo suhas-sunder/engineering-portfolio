@@ -1,7 +1,7 @@
 # Suhas Sunder — Engineering Portfolio
 
-A purpose-built electrical and computer engineering portfolio for Suhas Sunder,
-Engineer-in-Training with Engineers and Geoscientists BC.
+A purpose-built engineering portfolio for Suhas Sunder, Engineer-in-Training
+with Engineers and Geoscientists BC.
 
 The site presents engineering identity first: EIT registration, an MEng in
 Electrical and Computer Engineering, substantive academic and independent

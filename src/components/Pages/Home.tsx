@@ -61,17 +61,21 @@ function Home() {
             </p>
 
             <p className="mt-4 max-w-4xl text-base font-semibold leading-7 text-teal-800 sm:text-lg">
-              Electrical Engineering • Power Systems • Technical Project
+              Engineering Analysis | Systems Thinking | Technical Project
               Delivery
             </p>
 
             <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-              Registered with Engineers and Geoscientists BC and recently
-              completed an MEng in Electrical and Computer Engineering. Brings
-              approximately three years of professional technical experience
-              across software development and project delivery while
-              deliberately pursuing a long-term engineering career and P.Eng.
-              licensure.
+              Completed an MEng in Electrical and Computer Engineering and a
+              BEng in Electrical Engineering and Management. Brings
+              approximately three years of professional software-development
+              and technical project-delivery experience, with strengths in
+              systems thinking, requirements analysis, testing,
+              troubleshooting, documentation, and cross-functional
+              collaboration. Project work spans embedded systems, electrical
+              fault detection, MATLAB/Simulink modelling, optimization, and
+              engineering project planning. Deliberately pursuing a long-term
+              engineering career and eventual P.Eng. licensure.
             </p>
 
             <div className="mt-5 text-slate-700">
