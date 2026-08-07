@@ -1,142 +1,88 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Home from "../Home";
 import { MemoryRouter } from "react-router-dom";
 
-interface PropType {
-  showModal: boolean;
-  handleModal: () => void;
-}
-
-const mockHome = (props: PropType) => {
+const renderHome = () => {
   render(
     <MemoryRouter>
-      <Home {...props} />
+      <Home />
     </MemoryRouter>,
   );
 };
 
-const handleModal = jest.fn();
+describe("engineering portfolio home", () => {
+  beforeEach(renderHome);
 
-describe("renders all page elements", () => {
-  beforeEach(() => {
-    mockHome({ showModal: false, handleModal });
-  });
-
-  it("should render a header title text", () => {
-    const headerElement = screen.getByText(/Suhas Sunder/i);
-    expect(headerElement).toBeInTheDocument();
-    expect(headerElement).toHaveTextContent(/Software Developer/i);
-  });
-
-  it("should render a profile image", () => {
-    const imageElement = screen.getByAltText(/headshot of suhas sunder/i);
-    expect(imageElement).toBeInTheDocument();
-  });
-
-  it("should render project preview images", () => {
-    const imgElements = screen.getAllByRole("img");
-    expect(imgElements.length).toBeGreaterThanOrEqual(11);
-  });
-
-  it("should render list of 19 skills", () => {
-    const skillElements = screen.getAllByTestId(/skill-icon-/i);
-    expect(skillElements).toHaveLength(19);
-  });
-
-  it("should render a projects section", () => {
-    const projectsHeading = screen.getByRole("heading", { name: /projects/i });
-    expect(projectsHeading).toBeInTheDocument();
-  });
-
-  it("should render project cards from current project data", () => {
+  it("renders the engineering-first hero", () => {
     expect(
-      screen.getByRole("heading", { name: /smart home sensor planner/i }),
+      screen.getByRole("heading", { name: /suhas sunder/i, level: 1 }),
     ).toBeInTheDocument();
+    expect(screen.getAllByText(/electrical & computer engineering/i).length).toBeGreaterThan(0);
     expect(
-      screen.getByRole("heading", { name: /feature variability visualizer/i }),
-    ).toBeInTheDocument();
+      within(screen.getByRole("banner")).queryByText(/software developer/i),
+    ).not.toBeInTheDocument();
+  });
+
+  it("renders the professional headshot", () => {
     expect(
-      screen.getByRole("heading", { name: /free typing camp/i }),
+      screen.getByAltText(/professional headshot of suhas sunder/i),
     ).toBeInTheDocument();
   });
 
-  it("should render a contact form", () => {
-    const formElement = screen.getByRole("form");
-    expect(formElement).toBeInTheDocument();
+  it("renders all four engineering projects", () => {
+    [
+      /arc fault detection system/i,
+      /hybrid electric vehicle \/ battery electric vehicle simulation/i,
+      /engineering construction planning/i,
+      /smart home sensor planner/i,
+    ].forEach((name) => {
+      expect(screen.getByRole("heading", { name })).toBeInTheDocument();
+    });
   });
-});
 
-describe("renders links/buttons with proper redirect/action", () => {
-  beforeEach(() => {
-    mockHome({ showModal: false, handleModal });
+  it("renders verified project images and explicit evidence placeholders", () => {
+    expect(
+      screen.getByAltText(/arc fault detection capstone prototype/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByAltText(/smart home sensor planner interface/i),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/evidence placeholder/i)).toHaveLength(2);
   });
 
-  it("should render a link to linkedin profile", () => {
-    const modalBtnElement = screen.getByTestId(/linkedin/i);
-    expect(modalBtnElement).toBeInTheDocument();
-    expect(modalBtnElement).toHaveAttribute(
-      "href",
-      "https://www.linkedin.com/in/s-sunder/",
+  it("renders engineering education without duplicated BEng coursework", () => {
+    expect(
+      screen.getByRole("heading", {
+        name: /master of engineering in electrical and computer engineering/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /bachelor of engineering in electrical engineering and management/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/advanced engineering mathematics/i),
+    ).toHaveLength(1);
+  });
+
+  it("renders the working contact form and direct contact details", () => {
+    expect(screen.getByRole("form", { name: /contact form/i })).toHaveAttribute(
+      "action",
+      "https://formspree.io/f/xknaendo",
     );
+    expect(
+      screen
+        .getAllByRole("link", { name: /suhas@live.ca/i })
+        .every((link) => link.getAttribute("href") === "mailto:suhas@live.ca"),
+    ).toBe(true);
   });
 
-  it("should render a link to github profile", () => {
-    const modalBtnElement = screen.getByTestId(/githublogoicon/i);
-    expect(modalBtnElement).toBeInTheDocument();
-    expect(modalBtnElement).toHaveAttribute(
-      "href",
-      "https://github.com/suhas-sunder",
-    );
-  });
-
-  it("should render a link to certifications", () => {
-    const modalBtnElement = screen.getByTestId(/certificates/i);
-    expect(modalBtnElement).toBeInTheDocument();
-    expect(modalBtnElement).toHaveAttribute(
-      "href",
-      "https://www.linkedin.com/in/s-sunder/details/certifications/",
-    );
-  });
-
-  it("should render a link to education history", () => {
-    const modalBtnElement = screen.getByTestId(/education/i);
-    expect(modalBtnElement).toBeInTheDocument();
-    expect(modalBtnElement).toHaveAttribute(
-      "href",
-      "https://www.linkedin.com/in/s-sunder/details/education/",
-    );
-  });
-
-  it("should render a hashlink to email form", () => {
-    const modalBtnElement = screen.getByTestId(/email/i);
-    expect(modalBtnElement).toBeInTheDocument();
-    expect(modalBtnElement).toHaveAttribute("href", "/#contact");
-  });
-
-  it("should render live demo links for current projects", () => {
-    const liveDemoLinks = screen.getAllByRole("link", { name: /live demo/i });
-    expect(liveDemoLinks.length).toBeGreaterThan(0);
-  });
-
-  it("should render github links for projects that include repos", () => {
-    const githubLinks = screen.getAllByRole("link", { name: /github/i });
-    expect(githubLinks.length).toBeGreaterThan(0);
-  });
-
-  it("should render a submit button for contact form", () => {
-    const formElement = screen.getByRole("button", { name: /submit/i });
-    expect(formElement).toBeInTheDocument();
-  });
-});
-
-describe("renders appropriate elements when modal is active", () => {
-  beforeEach(() => {
-    mockHome({ showModal: true, handleModal });
-  });
-
-  it("should render a modal when modal state is true", () => {
-    const modalElement = screen.getByText(/Graduated: Apr 2019/i);
-    expect(modalElement).toBeInTheDocument();
+  it("does not expose the legacy software resume", () => {
+    expect(
+      screen.getByRole("button", { name: /engineering résumé pdf is pending/i }),
+    ).toBeDisabled();
+    expect(screen.queryByTestId("engineering-resume-link")).not.toBeInTheDocument();
   });
 });

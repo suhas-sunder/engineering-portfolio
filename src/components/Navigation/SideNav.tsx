@@ -1,28 +1,17 @@
-import { faArrowUp as upArrow } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 function SideNav() {
-  const location = useLocation();
-
   return (
-    <div className="group fixed right-8 bottom-8 z-50 hidden text-slate-700 sm:flex">
-      <ul>
-        <li>
-          <Link
-            to={`${location.pathname || "/"}`}
-            aria-label="Scroll to top"
-            className="relative flex cursor-pointer flex-col rounded-full border border-slate-300 bg-white p-3 text-xl font-bold tracking-widest text-slate-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50 hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500/30"
-          >
-            <FontAwesomeIcon icon={upArrow} />
-
-            <span className="absolute -bottom-8 -left-6 flex whitespace-nowrap text-[0.6rem] font-semibold text-slate-600 opacity-0 transition group-hover:opacity-100">
-              Scroll To Top
-            </span>
-          </Link>
-        </li>
-      </ul>
-    </div>
+    <HashLink
+      to="/#about"
+      scroll={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Scroll to top"
+      className="fixed bottom-6 right-6 z-40 hidden h-12 w-12 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 shadow-md transition hover:border-teal-700 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 sm:flex"
+    >
+      <FontAwesomeIcon icon={faArrowUp} aria-hidden="true" />
+    </HashLink>
   );
 }
 

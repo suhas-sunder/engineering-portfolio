@@ -2,28 +2,26 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Skills from "../Skills";
 
-describe("renders skill elements", () => {
-  it("should render a title", () => {
-    render(<Skills />);
-    const headingElement = screen.getByRole("heading", { name: /technical skills/i });
-    expect(headingElement).toBeInTheDocument();
+describe("engineering skills", () => {
+  beforeEach(() => render(<Skills />));
+
+  it("renders the categorized skills heading", () => {
+    expect(
+      screen.getByRole("heading", {
+        name: /engineering capability, clearly categorized/i,
+      }),
+    ).toBeInTheDocument();
   });
 
-  it("should render 19 skill items", () => {
-    render(<Skills />);
-    const listElements = screen.getAllByRole("listitem");
-    expect(listElements.length).toBe(19);
+  it("renders four skill categories instead of a software icon wall", () => {
+    expect(screen.getAllByTestId("skill-category")).toHaveLength(4);
+    expect(screen.queryByTestId(/skill-icon/i)).not.toBeInTheDocument();
   });
 
-  it("should render a list of 19 icons", () => {
-    render(<Skills />);
-    const iconElements = screen.getAllByTestId(/skill-icon/i);
-    expect(iconElements.length).toBe(19);
-  });
-
-  it("should render a list of 19 skill names", () => {
-    render(<Skills />);
-    const spanElements = screen.getAllByTestId(/skill-name/i);
-    expect(spanElements.length).toBe(19);
+  it("includes engineering tools and the accurate AutoCAD Web label", () => {
+    expect(screen.getByText("MATLAB")).toBeInTheDocument();
+    expect(screen.getByText("Simulink")).toBeInTheDocument();
+    expect(screen.getByText("AutoCAD Web")).toBeInTheDocument();
+    expect(screen.queryByText(/^AutoCAD$/)).not.toBeInTheDocument();
   });
 });

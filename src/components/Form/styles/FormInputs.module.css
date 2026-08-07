@@ -1,45 +1,13 @@
-.form-section {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-}
-
-.highlight {
-  color: yellow;
-  text-decoration: none;
-}
-
 .input,
-.message,
-.invalid-input {
-  height: 2.1em;
-  padding-left: 0.5rem;
-  border-radius: 2px;
+.message {
+  min-width: 0;
 }
 
 .invalid-input:invalid {
-  background-color: rgb(246, 246, 196);
-}
-
-.input:invalid ~ span,
-.message:invalid ~ span {
-  display: block;
-}
-
-.input:valid ~ span,
-.message:valid ~ span {
-  display: none;
-}
-
-.error {
-  color: yellow;
-  margin: 0;
+  border-color: #b91c1c;
+  background-color: #fffafa;
 }
 
 .message {
-  padding-top: 0.5rem;
-  min-height: 4em;
   resize: vertical;
 }
-
-

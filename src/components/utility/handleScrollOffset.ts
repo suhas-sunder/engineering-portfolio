@@ -1,8 +1,12 @@
-function handleScrollOffset(el: HTMLElement) {
-  const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
-  const yOffset = -160;
+function handleScrollOffset(element: HTMLElement) {
+  const navigation = document.querySelector<HTMLElement>(
+    "nav[aria-label='Primary navigation']",
+  );
+  const navigationOffset = navigation?.getBoundingClientRect().height ?? 72;
+  const targetPosition =
+    element.getBoundingClientRect().top + window.scrollY - navigationOffset;
 
-  window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
+  window.scrollTo({ top: Math.max(0, targetPosition), behavior: "smooth" });
 }
 
 export default handleScrollOffset;

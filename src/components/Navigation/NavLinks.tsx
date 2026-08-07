@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin as linkedinIcon } from "@fortawesome/free-brands-svg-icons";
-import { faGithub as githubIcon } from "@fortawesome/free-brands-svg-icons";
-import { faArrowRight as arrowIcon } from "@fortawesome/free-solid-svg-icons";
-import { faUpRightFromSquare as arrowUpIcon } from "@fortawesome/free-solid-svg-icons";
-import Styles from "./styles/ButtonLink.module.css";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faArrowRight,
+  faArrowUpRightFromSquare,
+} from "@fortawesome/free-solid-svg-icons";
 import handleScrollOffset from "../utility/handleScrollOffset";
 
 interface PropType {
@@ -18,7 +18,6 @@ interface PropType {
   isHashLink?: boolean;
   onClick?: () => void;
 }
-
 export default function NavLinks({
   id,
   text,
@@ -27,49 +26,28 @@ export default function NavLinks({
   url,
   target,
   isHashLink,
+  onClick,
 }: PropType) {
   const logos = {
-    download: arrowUpIcon,
-    linkedin: linkedinIcon,
-    github: githubIcon,
-    arrow: arrowIcon,
-    arrowUp: arrowUpIcon,
+    download: faArrowUpRightFromSquare,
+    linkedin: faLinkedin,
+    github: faGithub,
+    arrow: faArrowRight,
+    arrowUp: faArrowUpRightFromSquare,
   };
 
-  const isMobileMenuLink = type === "mobile-menu-link";
-  const isMobileDownloadLink = type === "mobile-download-link";
+  const className =
+    type === "mobile-menu-link"
+      ? "flex min-h-12 w-full items-center justify-between border-b border-slate-300 px-2 py-3 text-base font-semibold text-slate-800 transition hover:border-teal-700 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+      : type === "nav-link"
+        ? "inline-flex min-h-11 items-center px-3 py-2 text-[0.78rem] font-bold uppercase tracking-[0.1em] text-slate-700 transition hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+        : "inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-teal-700 bg-white px-4 py-2.5 text-sm font-bold text-teal-800 transition hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2";
 
-  const isPrimaryAction =
-    type !== "nav-link" &&
-    type !== "nav-link-mobile" &&
-    type !== "mobile-link" &&
-    type !== "mobile-menu-link" &&
-    type !== "mobile-download-link";
-
-  const isExternalLink =
-    target === "_blank" ||
-    url.startsWith("http://") ||
-    url.startsWith("https://");
-
-  const linkClassName = isPrimaryAction
-    ? "flex cursor-pointer items-center justify-center gap-2 rounded-md border border-sky-300 bg-sky-300 px-[0.67em] py-[0.7em] text-xs font-bold uppercase tracking-widest text-slate-950 shadow-sm transition hover:border-sky-200 hover:bg-sky-200 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-sky-300/50 sm:px-5 sm:text-sm"
-    : "flex cursor-pointer items-center justify-center px-5 py-5 text-base font-semibold uppercase tracking-widest text-sky-300 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-400/40";
-  const mobileMenuLinkClassName =
-    "flex w-full cursor-pointer items-center justify-center rounded-lg border border-slate-800 bg-slate-900/80 px-4 py-4 text-base font-semibold uppercase tracking-[0.13em] text-slate-100 transition hover:border-sky-400/40 hover:bg-slate-800 hover:text-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400/40";
-
-  const mobileDownloadLinkClassName =
-    "flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-sky-300 px-5 py-4 text-base font-bold uppercase tracking-[0.13em] text-slate-950 transition hover:bg-sky-200 hover:text-slate-950 focus:outline-none focus:ring-2 focus:ring-sky-300/50";
-
-  const finalClassName = isMobileDownloadLink
-    ? mobileDownloadLinkClassName
-    : isMobileMenuLink
-      ? mobileMenuLinkClassName
-      : linkClassName;
-
-  const dispText = text && <span className={Styles.text}>{text}</span>;
-
-  const dispLogo = logo && logos[logo] && (
-    <FontAwesomeIcon icon={logos[logo]} className={Styles.icon} />
+  const contents = (
+    <>
+      <span>{text}</span>
+      {logo ? <FontAwesomeIcon icon={logos[logo]} aria-hidden="true" /> : null}
+    </>
   );
 
   if (isHashLink) {
@@ -78,15 +56,20 @@ export default function NavLinks({
         data-testid={`btn-link-${id}`}
         to={url}
         aria-label={text || "Navigation link"}
-        className={finalClassName}
+        className={className}
         target={target}
-        scroll={(el) => handleScrollOffset(el)}
+        onClick={onClick}
+        scroll={(element) => handleScrollOffset(element)}
       >
-        {dispText}
-        {dispLogo}
+        {contents}
       </HashLink>
     );
   }
+
+  const isExternalLink =
+    target === "_blank" ||
+    url.startsWith("http://") ||
+    url.startsWith("https://");
 
   if (isExternalLink) {
     return (
@@ -94,12 +77,12 @@ export default function NavLinks({
         data-testid={`btn-link-${id}`}
         href={url}
         aria-label={text || "Navigation link"}
-        className={finalClassName}
+        className={className}
         target={target}
         rel={target === "_blank" ? "noopener noreferrer" : undefined}
+        onClick={onClick}
       >
-        {dispText}
-        {dispLogo}
+        {contents}
       </a>
     );
   }
@@ -109,11 +92,11 @@ export default function NavLinks({
       data-testid={`btn-link-${id}`}
       to={url}
       aria-label={text || "Navigation link"}
-      className={finalClassName}
+      className={className}
       target={target}
+      onClick={onClick}
     >
-      {dispText}
-      {dispLogo}
+      {contents}
     </Link>
   );
 }

@@ -1,6 +1,15 @@
 import { FormEvent, FocusEvent, ChangeEvent, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faLocationDot,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import FormInput from "./FormInputs";
 import FormSubmitMsg from "../Layout/FormSubmitMsg";
+import SectionHeading from "../UI/SectionHeading";
+import { siteConfig } from "../../config/site";
 
 type SubmissionState = "false" | "sending" | "sent" | "error";
 
@@ -12,7 +21,6 @@ type FormValues = {
   phone: string;
   message: string;
   messageTouched: boolean;
-  disableAutoComplete: boolean;
 };
 
 type FormInputData = {
@@ -23,6 +31,7 @@ type FormInputData = {
   label: string;
   errorMessage?: string;
   required: boolean;
+  autoComplete: string;
 };
 
 function Contact() {
@@ -34,9 +43,7 @@ function Contact() {
     phone: "",
     message: "",
     messageTouched: false,
-    disableAutoComplete: false,
   });
-
   const [isSubmitted, setIsSubmitted] = useState<SubmissionState>("false");
 
   const formInputData: FormInputData[] = [
@@ -44,36 +51,40 @@ function Contact() {
       id: "name-input",
       name: "name",
       type: "text",
-      placeholder: "Name",
+      placeholder: "Your name",
       label: "Name",
-      errorMessage: "* Please enter a valid name!",
+      errorMessage: "Please enter your name.",
       required: true,
+      autoComplete: "name",
     },
     {
       id: "email-input",
       name: "email",
       type: "email",
-      placeholder: "Email",
+      placeholder: "name@example.com",
       label: "Email",
-      errorMessage: "* Please enter a valid email address!",
+      errorMessage: "Please enter a valid email address.",
       required: true,
+      autoComplete: "email",
     },
     {
       id: "phone-input",
       name: "phone",
-      type: "text",
-      placeholder: "Phone",
+      type: "tel",
+      placeholder: "Optional",
       label: "Phone",
       required: false,
+      autoComplete: "tel",
     },
     {
-      id: "text-input",
+      id: "message-input",
       type: "text",
       name: "message",
-      placeholder: "Message",
+      placeholder: "How can I help?",
       label: "Message",
-      errorMessage: "* Please enter a valid message!",
+      errorMessage: "Please enter a message.",
       required: true,
+      autoComplete: "off",
     },
   ];
 
@@ -82,29 +93,27 @@ function Contact() {
   ) => {
     const fieldName = event.target.name as keyof FormValues;
 
-    setValues({
-      ...values,
+    setValues((currentValues) => ({
+      ...currentValues,
       [fieldName]: event.target.value,
       [`${fieldName}Touched`]: false,
-    });
+    }));
   };
 
-  const handleFocus = (
+  const handleBlur = (
     event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const fieldName = event.target.name as keyof FormValues;
 
-    setValues({
-      ...values,
+    setValues((currentValues) => ({
+      ...currentValues,
       [fieldName]: event.target.value.trim(),
       [`${fieldName}Touched`]: true,
-      disableAutoComplete: false,
-    });
+    }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     setIsSubmitted("sending");
 
     const data = new FormData(event.currentTarget);
@@ -112,9 +121,7 @@ function Contact() {
     fetch(event.currentTarget.action, {
       method: "POST",
       body: data,
-      headers: {
-        Accept: "application/json",
-      },
+      headers: { Accept: "application/json" },
     })
       .then((response) => {
         setIsSubmitted(response.ok ? "sent" : "error");
@@ -124,65 +131,141 @@ function Contact() {
       });
   };
 
-  const handleAutoComplete = () => {
-    setValues({
-      ...values,
-      disableAutoComplete: true,
-    });
-  };
+  const contactDetails = [
+    {
+      label: "Phone",
+      value: siteConfig.phoneDisplay,
+      href: siteConfig.phoneHref,
+      icon: faPhone,
+    },
+    {
+      label: "Email",
+      value: siteConfig.email,
+      href: `mailto:${siteConfig.email}`,
+      icon: faEnvelope,
+    },
+    {
+      label: "LinkedIn",
+      value: "linkedin.com/in/s-sunder",
+      href: siteConfig.linkedIn,
+      icon: faLinkedin,
+    },
+  ];
 
   return (
     <section
       id="contact"
-      className="bg-slate-900 px-4 py-16 text-white sm:px-6 lg:px-10"
+      className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
       aria-labelledby="contact-heading"
     >
-      <div className="mx-auto flex w-full max-w-[640px] flex-col rounded-2xl border border-slate-800 bg-slate-950/40 py-6 shadow-xl shadow-slate-950/20 sm:p-8 md:box-content lg:p-10">
-        <h2
-          id="contact-heading"
-          className="flex w-full items-center justify-center text-center text-2xl font-semibold tracking-tight text-white sm:text-3xl"
-        >
-          Let's have a chat!
-        </h2>
+      <div className="mx-auto w-full max-w-[82rem]">
+        <div id="contact-heading">
+          <SectionHeading
+            number="06 / 06"
+            eyebrow="Contact"
+            title="Start a conversation"
+            description="For electrical engineering, infrastructure, industrial, electrification, and early-career project-delivery opportunities in British Columbia."
+          />
+        </div>
 
-        <form
-          aria-label="form"
-          id="contact-form"
-          action="https://formspree.io/f/xknaendo"
-          method="POST"
-          onSubmit={handleSubmit}
-          className="mt-6 flex flex-col gap-3 text-slate-950"
-          autoComplete={values.disableAutoComplete ? "off" : "on"}
-        >
-          {isSubmitted === "false" ? (
-            <>
-              {formInputData.map((data) => (
-                <FormInput
-                  key={data.id}
-                  {...data}
-                  value={values[data.name]}
-                  onChange={handleChange}
-                  onBlur={handleFocus}
-                  touched={
-                    data.required ? values[`${data.name}Touched`] : false
+        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(17rem,0.72fr)_minmax(0,1.28fr)] lg:gap-14 xl:gap-20">
+          <div>
+            <p className="text-2xl font-semibold tracking-tight text-slate-950">
+              Suhas Sunder
+            </p>
+            <p className="mt-4 flex items-start gap-3 text-base leading-7 text-slate-600">
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                className="mt-1 text-teal-700"
+                aria-hidden="true"
+              />
+              <span>
+                Toronto, ON
+                <br />
+                Relocating to Vancouver, BC
+              </span>
+            </p>
+
+            <address className="mt-8 grid gap-5 not-italic">
+              {contactDetails.map((detail) => (
+                <a
+                  key={detail.label}
+                  href={detail.href}
+                  target={detail.label === "LinkedIn" ? "_blank" : undefined}
+                  rel={
+                    detail.label === "LinkedIn"
+                      ? "noopener noreferrer"
+                      : undefined
                   }
-                />
+                  className="group flex min-h-11 items-start gap-4 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  <span className="flex h-10 w-10 flex-none items-center justify-center border border-slate-300 bg-[#f7f6f2] text-teal-800 transition group-hover:border-teal-700">
+                    <FontAwesomeIcon icon={detail.icon} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 pt-0.5">
+                    <span className="block text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+                      {detail.label}
+                    </span>
+                    <span className="mt-1 block break-words text-sm font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 group-hover:text-teal-800 group-hover:decoration-teal-700">
+                      {detail.value}
+                    </span>
+                  </span>
+                </a>
               ))}
-            </>
-          ) : (
-            <FormSubmitMsg submissionState={isSubmitted} />
-          )}
+            </address>
 
-          {isSubmitted === "false" && (
-            <button
-              className="mx-6 mt-6 mb-1 min-h-12 cursor-pointer rounded-lg border border-sky-300 bg-sky-300 px-5 py-3 text-base font-bold uppercase tracking-widest text-slate-950 transition hover:border-sky-200 hover:bg-sky-200 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:mx-8 sm:text-lg"
-              type="submit"
-              onClick={handleAutoComplete}
+            <a
+              href={siteConfig.url}
+              className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
             >
-              Submit
-            </button>
-          )}
-        </form>
+              suhassunder.ca
+            </a>
+          </div>
+
+          <div className="border border-slate-300 bg-[#f7f6f2] p-5 sm:p-8 lg:p-10">
+            <h3 className="text-2xl font-semibold tracking-tight text-slate-950">
+              Send a message
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Required fields are marked with an asterisk.
+            </p>
+
+            <form
+              aria-label="Contact form"
+              id="contact-form"
+              action="https://formspree.io/f/xknaendo"
+              method="POST"
+              onSubmit={handleSubmit}
+              className="mt-6 grid gap-5"
+            >
+              {isSubmitted === "false" ? (
+                <>
+                  {formInputData.map((data) => (
+                    <FormInput
+                      key={data.id}
+                      {...data}
+                      value={values[data.name]}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      touched={
+                        data.required ? values[`${data.name}Touched`] : false
+                      }
+                    />
+                  ))}
+
+                  <button
+                    className="mt-2 min-h-12 cursor-pointer rounded-md border border-slate-900 bg-slate-900 px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:border-teal-800 hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
+                    type="submit"
+                  >
+                    Send message
+                  </button>
+                </>
+              ) : (
+                <FormSubmitMsg submissionState={isSubmitted} />
+              )}
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   );

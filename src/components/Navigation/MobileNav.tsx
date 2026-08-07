@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
-import NavLinks from "./NavLinks";
-import Styles from "./styles/MobileNav.module.css";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars as burgerIcon } from "@fortawesome/free-solid-svg-icons";
-import { faX as xIcon } from "@fortawesome/free-solid-svg-icons";
-import NavBtnData from "../../data/NavBtnData";
-import { faS as logoIcon } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
-type NavLogo = "download" | "github" | "linkedin" | "arrow" | "arrowUp";
+import NavLinks from "./NavLinks";
+import NavBtnData from "../../data/NavBtnData";
+import ResumeLink from "./ResumeLink";
 
 export default function MobileNav() {
   const [isMenuClosed, setIsMenuClosed] = useState(true);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleBurgerMenu = () => {
     setIsMenuClosed((currentState) => !currentState);
@@ -27,6 +24,7 @@ export default function MobileNav() {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeBurgerMenu();
+        menuButtonRef.current?.focus();
       }
     };
 
@@ -40,22 +38,29 @@ export default function MobileNav() {
   }, [isMenuClosed]);
 
   return (
-    <>
-      <div
-        className={`${Styles["mobile-nav"]} !relative !z-[80] !border-b !border-slate-800 !bg-slate-950/95 !text-slate-100 !shadow-sm !backdrop-blur lg:!hidden`}
-        id="mobile-nav"
-      >
+    <div className="xl:hidden">
+      <div className="relative z-[80] flex min-h-[4.25rem] items-center justify-between gap-2 px-4 sm:px-6">
         <Link
           to="/"
           onClick={closeBurgerMenu}
-          aria-label="Go to home page"
-          className="ml-5 flex h-11 w-11 cursor-pointer items-center justify-center rounded-md bg-sky-400/10 text-xl text-sky-300 transition hover:bg-sky-400/20 hover:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          aria-label="Suhas Sunder engineering portfolio home"
+          className="flex min-h-11 min-w-0 items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
         >
-          <FontAwesomeIcon icon={logoIcon} />
+          <span className="flex h-10 w-10 items-center justify-center bg-slate-900 text-sm font-bold tracking-wider text-white">
+            SS
+          </span>
+          <span className="leading-tight">
+            <span className="block text-sm font-bold text-slate-950">
+              Suhas Sunder
+            </span>
+            <span className="block text-[0.62rem] font-bold uppercase tracking-[0.13em] text-teal-700 max-[359px]:hidden">
+              EIT · Electrical Engineering
+            </span>
+          </span>
         </Link>
 
         <button
-          key={isMenuClosed ? "menu-open" : "menu-close"}
+          ref={menuButtonRef}
           type="button"
           data-testid={isMenuClosed ? "burgerBtn-open" : "burgerBtn-close"}
           aria-label={
@@ -63,12 +68,13 @@ export default function MobileNav() {
           }
           aria-expanded={!isMenuClosed}
           aria-controls="burger-menu"
-          className="mr-5 flex h-11 w-11 cursor-pointer items-center justify-center rounded-md bg-slate-900 text-slate-100 transition hover:bg-slate-800 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-md border border-slate-300 bg-white text-slate-900 transition hover:border-teal-700 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
           onClick={toggleBurgerMenu}
         >
           <FontAwesomeIcon
-            icon={isMenuClosed ? burgerIcon : xIcon}
+            icon={isMenuClosed ? faBars : faXmark}
             className="text-lg"
+            aria-hidden="true"
           />
         </button>
       </div>
@@ -79,42 +85,34 @@ export default function MobileNav() {
             type="button"
             data-testid="mobile-nav-bkgd"
             aria-label="Close navigation menu"
-            className={`${Styles["background-overlay"]} !fixed !inset-x-0 !top-[3.5625rem] !bottom-0 !z-[60] !h-auto !w-full !cursor-pointer !border-0 !bg-slate-950/60 lg:!hidden`}
+            className="fixed inset-x-0 bottom-0 top-[4.25rem] z-[60] h-auto w-full cursor-pointer border-0 bg-slate-950/35"
             onClick={closeBurgerMenu}
           />
 
-          <ul
+          <div
             id="burger-menu"
-            className={`${Styles["nav-list"]} !fixed !inset-x-0 !top-[3.5625rem] !z-[70] !flex !max-h-[calc(100dvh-3.5625rem)] !w-full !max-w-none !flex-col !gap-3 !overflow-y-auto !overflow-x-hidden !bg-slate-950 !px-4 !py-6 !text-slate-100 !shadow-xl lg:!hidden`}
+            className="fixed inset-x-0 top-[4.25rem] z-[70] max-h-[calc(100dvh-4.25rem)] overflow-y-auto border-b border-slate-300 bg-[#f7f6f2] px-4 py-5 shadow-xl sm:px-6"
           >
-            {NavBtnData.filter((data) => data.text !== "Home").map((data) => {
-              const isDownloadButton = data.type === "downloadBtn";
-
-              return (
-                <li
-                  key={data.id}
-                  onClick={closeBurgerMenu}
-                  className="mx-auto w-full max-w-[22rem]"
-                >
+            <ul className="mx-auto grid w-full max-w-xl gap-2">
+              {NavBtnData.map((data) => (
+                <li key={data.id} onClick={closeBurgerMenu}>
                   <NavLinks
                     id={data.id}
                     url={data.url}
-                    type={
-                      isDownloadButton
-                        ? "mobile-download-link"
-                        : "mobile-menu-link"
-                    }
+                    type="mobile-menu-link"
                     text={data.text}
-                    logo={data.logo as NavLogo | undefined}
-                    target={data.target}
                     isHashLink={data.hashLink}
                   />
                 </li>
-              );
-            })}
-          </ul>
+              ))}
+            </ul>
+
+            <div className="mx-auto mt-4 w-full max-w-xl border-t border-slate-300 pt-4">
+              <ResumeLink variant="nav" />
+            </div>
+          </div>
         </>
       )}
-    </>
+    </div>
   );
 }

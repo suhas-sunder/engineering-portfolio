@@ -1,82 +1,57 @@
-# Personal Portfolio Website
+# Suhas Sunder — Engineering Portfolio
 
-A responsive personal portfolio website built to showcase my background, technical skills, and selected software projects.
+A purpose-built electrical and computer engineering portfolio for Suhas Sunder,
+Engineer-in-Training with Engineers and Geoscientists BC.
 
-**Live site:** [suhassunder.com](https://suhassunder.com)
+The site presents engineering identity first: EIT registration, an MEng in
+Electrical and Computer Engineering, substantive academic and independent
+engineering projects, project-delivery capability, and transferable professional
+software experience.
 
-Built using **React**, **TypeScript**, and **Tailwind CSS**.  
-Deployed using **Netlify**.
+## Portfolio structure
 
-## Project Overview
+- Engineering-first hero and relocation status
+- Engineering focus and capabilities
+- Detailed engineering project case studies
+- Categorized engineering tools, analysis, delivery, and programming skills
+- Education and EIT credential
+- Professional technical delivery experience
+- Accessible contact information and Formspree contact form
 
-This project is my personal portfolio website and serves as a central place to present my experience, technical background, and selected work.
-
-The site was built to provide a clean, responsive, and professional overview of:
-
-- my software engineering background
-- the technologies I work with
-- selected personal, academic, and professional projects
-- ways to connect with me
-
-## Features
-
-- Responsive design across desktop and mobile devices
-- Built with reusable React components
-- Project showcase section with dedicated project pages
-- Skills section highlighting technical tools and technologies
-- Contact form and external profile links
-- Clean, modern UI designed for readability and easy navigation
-
-## Tech Stack
+## Technical foundation
 
 - React
 - TypeScript
+- React Router / hash navigation
 - Tailwind CSS
-- Netlify
+- React Testing Library and Jest
+- Netlify-compatible routing and Formspree contact submission
 
-## Purpose
-
-The goal of this project was to create a professional portfolio that clearly communicates who I am, what I build, and the kinds of software projects I have worked on. It is intended to serve as both a personal website and a practical front-end development project.
-
-## Screenshots
-
-### Home page - header
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/919bbae2-2074-41a7-ba6f-885349caab54)
-
-### Home page - skills section (collapsable menu)
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/c58cb169-f714-4512-9027-3a6596ed43cd)
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/c9666918-552b-4195-a306-2b4a0bcddafa)
-
-### Home page - project section
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/dab769db-79f5-4ca4-87c2-11d7afbedcfb)
-
-### Home page - email form & footer
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/56e54a10-f934-4dd8-ae4c-fbb2b125cdb8)
-
-### Project page - header & project overview
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/bf2482f8-b053-43c9-890a-95ad10db48b1)
-
-### Project page - challenges
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/b7b6d9b7-049e-4df2-89a4-83f7fac74561)
-
-### Mobile responsive design
-
-![image](https://github.com/suhas-sunder/react-portfolio-proj/assets/77464593/a71b6798-fb42-44a2-bfc9-7c295fabc3f4)
-
-## Local Development
-
-Clone the repository and install dependencies:
+## Local development
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
 npm install
-npm run dev
+npm start
 ```
+
+Run the automated checks with:
+
+```bash
+npm test -- --runInBand
+npm run build
+```
+
+## Resume configuration
+
+The legacy software-development resume is intentionally not exposed. Add the
+verified engineering resume URL or asset in `src/config/site.ts` before enabling
+the prominent resume controls.
+
+## Content TODOs
+
+- Add the verified engineering-resume PDF.
+- Add verified MATLAB/Simulink model screenshots, plots, or report excerpts.
+- Add verified engineering construction-planning artifacts such as the Gantt,
+  WBS, or risk-register excerpt.
+- Add exact BEng coursework when supplied; duplicated placeholder coursework is
+  intentionally omitted.

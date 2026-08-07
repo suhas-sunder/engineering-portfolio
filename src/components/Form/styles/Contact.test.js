@@ -1,52 +1,66 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Contact from "../Contact";
 
-describe("renders contact form elements", () => {
-  //   Display form
-  it("should render a form", () => {
-    render(<Contact />);
-    const formElement = screen.getByRole("form");
-    expect(formElement).toBeInTheDocument();
+describe("contact form", () => {
+  beforeEach(() => render(<Contact />));
+
+  it("renders the retained Formspree form", () => {
+    expect(screen.getByRole("form", { name: /contact form/i })).toHaveAttribute(
+      "action",
+      "https://formspree.io/f/xknaendo",
+    );
   });
 
-  it("should render 4 input fields", () => {
-    render(<Contact />);
-    const inputElement = screen.getAllByRole("textbox");
-    expect(inputElement.length).toBe(4);
+  it("renders four labelled text fields", () => {
+    expect(screen.getAllByRole("textbox")).toHaveLength(4);
+    expect(screen.getByLabelText(/name/i)).toHaveAttribute(
+      "autocomplete",
+      "name",
+    );
+    expect(screen.getByLabelText(/email/i)).toHaveAttribute("type", "email");
+    expect(screen.getByLabelText(/phone/i)).toHaveAttribute("type", "tel");
   });
 
-  it("should render a button for submission", () => {
-    render(<Contact />);
-    const buttonElement = screen.getByRole("button", { name: /submit/i });
-    expect(buttonElement).toBeInTheDocument();
+  it("renders an accessible message submission button", () => {
+    expect(
+      screen.getByRole("button", { name: /send message/i }),
+    ).toBeInTheDocument();
   });
 
-  // focus and remove focus shows error and adds invalid class for input
+  it("shows validation feedback after a required field is left empty", () => {
+    fireEvent.blur(screen.getByLabelText(/name/i));
 
-  // focus and remove focus shows error and adds invalid class for textarea
+    expect(screen.getByText(/please enter your name/i)).toBeInTheDocument();
+  });
 
-  // Since form validation is handled by the "required" prop, validation is handled by the browser.
-  // Since jest is a Node-based runner, it does not perform browser validation so this test fails since form gets submitted.
-  // Solution is to setup my own validation and hide the default validation alert
-  // it("should not submit the form when input fields are empty", () => {
-  //   render(<Contact />);
-  //   const textElement = screen.getByTestId("textarea");
-  //   const buttonElement = screen.getByRole("button", { name: /submit/i });
-  //   fireEvent.click(buttonElement);
-  //   expect(buttonElement).toBeInTheDocument();
-  // });
+  it("shows the retained success state after a successful Formspree response", async () => {
+    global.fetch = jest.fn().mockResolvedValue({ ok: true });
 
-  // Clicking submit when required field is invalid focuses field with error
+    fireEvent.change(screen.getByLabelText(/name/i), {
+      target: { value: "QA User" },
+    });
+    fireEvent.change(screen.getByLabelText(/email/i), {
+      target: { value: "qa@example.com" },
+    });
+    fireEvent.change(screen.getByLabelText(/message/i), {
+      target: { value: "Portfolio verification" },
+    });
+    fireEvent.submit(screen.getByRole("form", { name: /contact form/i }));
 
-  // Name, phone and textarea are valid when text is written.
+    expect(screen.getByText(/sending your message/i)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText(/message has been sent successfully/i)).toBeInTheDocument(),
+    );
+  });
 
-  // Email field is only valid when email constraints are met
+  it("shows a direct-email fallback after a failed Formspree response", async () => {
+    global.fetch = jest.fn().mockRejectedValue(new Error("Network error"));
 
-  // When all fields are valid, form submits
+    fireEvent.submit(screen.getByRole("form", { name: /contact form/i }));
 
-  // If form fails to send, error message is shown
-
-  // If form sends successfully show success message
-  //   Hide button when submitted
+    await waitFor(() =>
+      expect(screen.getByText(/email suhas@live.ca directly/i)).toBeInTheDocument(),
+    );
+  });
 });

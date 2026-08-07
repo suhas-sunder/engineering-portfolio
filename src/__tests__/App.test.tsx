@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 import App from "../App";
 
-const mockApp = () => {
+const renderApp = () => {
   render(
     <MemoryRouter>
       <App />
@@ -11,37 +11,47 @@ const mockApp = () => {
   );
 };
 
-beforeEach(() => {
-  mockApp();
-});
+describe("engineering portfolio application", () => {
+  it("renders the engineering identity and EIT registration", () => {
+    renderApp();
 
-const testHref = (elements, link) => {
-  elements.forEach((element) => expect(element).toHaveAttribute("href", link));
-};
-
-describe("renders all page elements", () => {
-  it("should render a footer element", () => {
-    const footerElement = screen.getByText(/Designed & coded by/i);
-    expect(footerElement).toBeInTheDocument();
-  });
-
-  it("should render Suhas Sunder text in the document", () => {
-    const footerTextElements = screen.getAllByText(/suhas sunder/i);
-    expect(footerTextElements.length).toBeGreaterThan(0);
-  });
-
-  it("should render a footer source link", () => {
-    const sourceLink = screen.getByRole("link", { name: /view source/i });
-    expect(sourceLink).toBeInTheDocument();
-    expect(sourceLink).toHaveAttribute(
-      "href",
-      "https://github.com/suhas-sunder/react-portfolio-proj",
+    expect(
+      screen.getByRole("heading", { name: /suhas sunder/i, level: 1 }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/engineer-in-training/i).length).toBeGreaterThan(
+      0,
     );
+    expect(
+      screen.getAllByText(/engineers and geoscientists bc/i).length,
+    ).toBeGreaterThan(0);
   });
 
-  it("should render two email buttons in the document with proper links", () => {
-    const modalBtnElements = screen.getAllByTestId(/email/i);
-    expect(modalBtnElements).toHaveLength(2);
-    testHref(modalBtnElements, "/#contact");
+  it("renders the engineering sections in the portfolio", () => {
+    renderApp();
+
+    expect(
+      screen.getByRole("heading", {
+        name: /capabilities grounded in project work/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /technical work, methods, and evidence/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /engineering education and eit registration/i,
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it("renders the engineering repository source link", () => {
+    renderApp();
+
+    expect(screen.getByRole("link", { name: /view source/i })).toHaveAttribute(
+      "href",
+      "https://github.com/suhas-sunder/engineering-portfolio",
+    );
   });
 });

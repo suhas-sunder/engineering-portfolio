@@ -1,21 +1,37 @@
+import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
-import Styles from "./styles/NavBar.module.css";
 import MobileNav from "./MobileNav";
 import NavBtnData from "../../data/NavBtnData";
 import SideNav from "./SideNav";
-
-type NavLogo = "download" | "github" | "linkedin" | "arrow" | "arrowUp";
+import ResumeLink from "./ResumeLink";
 
 export default function NavBar() {
   return (
     <>
       <nav
-        role="navigation"
         aria-label="Primary navigation"
-        className={`${Styles.nav} !sticky !top-0 !z-50 !w-full !border-b !border-slate-800 !bg-slate-950/95 !text-slate-100 !shadow-sm !backdrop-blur`}
+        className="sticky top-0 z-50 w-full border-b border-slate-300 bg-[#f7f6f2]/95 text-slate-900 shadow-[0_1px_0_rgba(15,23,42,0.03)] backdrop-blur"
       >
-        <div className={`${Styles["nav-items"]} !bg-transparent`}>
-          <ul className="flex w-full max-w-[900px] items-center justify-evenly">
+        <div className="mx-auto hidden min-h-[4.5rem] w-full max-w-[88rem] items-center gap-6 px-6 xl:flex xl:px-10">
+          <Link
+            to="/"
+            aria-label="Suhas Sunder engineering portfolio home"
+            className="flex min-w-fit items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+          >
+            <span className="flex h-10 w-10 items-center justify-center bg-slate-900 text-sm font-bold tracking-wider text-white">
+              SS
+            </span>
+            <span className="leading-tight">
+              <span className="block text-sm font-bold text-slate-950">
+                Suhas Sunder
+              </span>
+              <span className="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-teal-700">
+                Engineer-in-Training
+              </span>
+            </span>
+          </Link>
+
+          <ul className="ml-auto flex items-center">
             {NavBtnData.map((data) => (
               <li key={data.id}>
                 <NavLinks
@@ -23,13 +39,13 @@ export default function NavBar() {
                   url={data.url}
                   type={data.type}
                   text={data.text}
-                  logo={data.logo as NavLogo | undefined}
-                  target={data.target}
                   isHashLink={data.hashLink}
                 />
               </li>
             ))}
           </ul>
+
+          <ResumeLink variant="nav" />
         </div>
 
         <MobileNav />

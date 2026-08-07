@@ -1,10 +1,11 @@
 const NavBtnData = [
   {
-    id: "nav-home",
-    url: "/",
-    text: "Home",
+    id: "nav-projects",
+    url: "/#projects",
+    text: "Projects",
     type: "nav-link",
     typeMobile: "mobile-nav-link",
+    hashLink: true,
   },
   {
     id: "nav-skills",
@@ -14,18 +15,18 @@ const NavBtnData = [
     typeMobile: "mobile-nav-link",
     hashLink: true,
   },
-   {
-    id: "nav-experience",
-    url: "/#experience",
-    text: "Experience",
+  {
+    id: "nav-education",
+    url: "/#education",
+    text: "Education",
     type: "nav-link",
     typeMobile: "mobile-nav-link",
     hashLink: true,
   },
   {
-    id: "nav-projects",
-    url: "/#projects",
-    text: "Projects",
+    id: "nav-experience",
+    url: "/#experience",
+    text: "Experience",
     type: "nav-link",
     typeMobile: "mobile-nav-link",
     hashLink: true,
@@ -37,15 +38,6 @@ const NavBtnData = [
     type: "nav-link",
     typeMobile: "mobile-nav-link",
     hashLink: true,
-  },
-  {
-    id: "nav-resume",
-    url: "https://drive.google.com/file/d/1z6dohrhC-abm8A4o263mVjtBYkoRyOlJ/view?usp=sharing",
-    text: "resume",
-    logo: "download",
-    type: "downloadBtn",
-    typeMobile: "downloadBtn",
-    target: "_blank",
   },
 ];
 

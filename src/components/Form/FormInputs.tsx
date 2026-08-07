@@ -10,68 +10,95 @@ interface FormInputsProps {
   id: string;
   label: string;
   errorMessage?: string;
-  touched: boolean;
+  touched?: boolean;
   name: string;
-  type: string;
-  placeholder: string;
+  type?: string;
+  placeholder?: string;
   required?: boolean;
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onBlur: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  value?: string;
+  autoComplete?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 export default function FormInputs(props: FormInputsProps) {
-  const { label, errorMessage, touched, ...formProps } = props;
-
-  const addTextArea = props.name !== "message";
+  const {
+    label,
+    errorMessage,
+    touched = false,
+    value = "",
+    onChange,
+    onBlur,
+    ...formProps
+  } = props;
+  const isInput = props.name !== "message";
+  const errorId = `${props.id}-error`;
+  const normalizedValue = value.trim();
+  const isInvalid =
+    touched &&
+    (normalizedValue.length === 0 ||
+      (props.type === "email" &&
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedValue)));
+  const fieldClassName = `${
+    isInput ? Styles.input : Styles.message
+  } ${isInvalid ? Styles["invalid-input"] : ""} w-full rounded-md border border-slate-300 bg-white px-3.5 py-3 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/15`;
 
   const inputProps: InputHTMLAttributes<HTMLInputElement> = {
     ...formProps,
-    onChange: props.onChange as ChangeEventHandler<HTMLInputElement>,
-    onBlur: props.onBlur as FocusEventHandler<HTMLInputElement>,
+    ...(onChange
+      ? {
+          value,
+          onChange: onChange as ChangeEventHandler<HTMLInputElement>,
+        }
+      : { defaultValue: value }),
+    onBlur: onBlur as FocusEventHandler<HTMLInputElement>,
+    "aria-describedby": isInvalid && errorMessage ? errorId : undefined,
+    "aria-invalid": isInvalid || undefined,
   };
 
   const textAreaProps: TextareaHTMLAttributes<HTMLTextAreaElement> = {
     ...formProps,
-    onChange: props.onChange as ChangeEventHandler<HTMLTextAreaElement>,
-    onBlur: props.onBlur as FocusEventHandler<HTMLTextAreaElement>,
+    ...(onChange
+      ? {
+          value,
+          onChange: onChange as ChangeEventHandler<HTMLTextAreaElement>,
+        }
+      : { defaultValue: value }),
+    onBlur: onBlur as FocusEventHandler<HTMLTextAreaElement>,
+    "aria-describedby": isInvalid && errorMessage ? errorId : undefined,
+    "aria-invalid": isInvalid || undefined,
   };
 
-  const input = (
-    <input
-      className={`${Styles.input} ${
-        touched && Styles["invalid-input"]
-      } rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-sky-300 focus:ring-2 focus:ring-sky-300/30 sm:text-base`}
-      {...inputProps}
-    />
-  );
-
-  const textArea = (
-    <textarea
-      className={`${Styles.message} ${
-        touched && Styles["invalid-input"]
-      } min-h-28 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-sky-300 focus:ring-2 focus:ring-sky-300/30 sm:text-base`}
-      {...textAreaProps}
-    />
-  );
-
   return (
-    <div className="mt-2 flex min-w-0 flex-col gap-3 px-6 text-sm sm:text-base">
-      <label htmlFor={props.id} className="font-semibold text-slate-100">
+    <div className="grid min-w-0 gap-2">
+      <label htmlFor={props.id} className="text-sm font-bold text-slate-800">
         {label}
-        {props.required && <span className="text-sky-300"> *</span>}
+        {props.required ? (
+          <span className="ml-1 text-teal-700" aria-hidden="true">
+            *
+          </span>
+        ) : null}
       </label>
 
-      {addTextArea ? input : textArea}
+      {isInput ? (
+        <input className={fieldClassName} {...inputProps} />
+      ) : (
+        <textarea
+          className={`${fieldClassName} min-h-36 resize-y`}
+          rows={6}
+          {...textAreaProps}
+        />
+      )}
 
-      {touched && (
+      {isInvalid && errorMessage ? (
         <span
+          id={errorId}
           data-testid="error"
-          className="text-sm font-semibold text-sky-300"
+          className="text-sm font-semibold text-red-700"
         >
           {errorMessage}
         </span>
-      )}
+      ) : null}
     </div>
   );
 }
