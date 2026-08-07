@@ -135,19 +135,24 @@ function ProjectArticle({
               </ul>
             </div>
 
-            {project.link ? (
-              <a
-                href={project.link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-md border border-teal-700 px-4 py-2.5 text-sm font-bold text-teal-800 transition hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
-              >
-                {project.link.label}
-                <FontAwesomeIcon
-                  icon={faArrowUpRightFromSquare}
-                  aria-hidden="true"
-                />
-              </a>
+            {project.links ? (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {project.links.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-md border border-teal-700 px-4 py-2.5 text-sm font-bold text-teal-800 transition hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+                  >
+                    {link.label}
+                    <FontAwesomeIcon
+                      icon={faArrowUpRightFromSquare}
+                      aria-hidden="true"
+                    />
+                  </a>
+                ))}
+              </div>
             ) : null}
           </div>
 

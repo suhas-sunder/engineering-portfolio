@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
   faArrowRight,
   faArrowUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import handleScrollOffset from "../utility/handleScrollOffset";
+import { handleSectionLinkClick } from "../utility/handleScrollOffset";
 
 interface PropType {
   id?: string;
@@ -52,17 +50,19 @@ export default function NavLinks({
 
   if (isHashLink) {
     return (
-      <HashLink
+      <a
         data-testid={`btn-link-${id}`}
-        to={url}
+        href={url}
         aria-label={text || "Navigation link"}
         className={className}
         target={target}
-        onClick={onClick}
-        scroll={(element) => handleScrollOffset(element)}
+        onClick={(event) => {
+          handleSectionLinkClick(event, url);
+          onClick?.();
+        }}
       >
         {contents}
-      </HashLink>
+      </a>
     );
   }
 
@@ -88,15 +88,15 @@ export default function NavLinks({
   }
 
   return (
-    <Link
+    <a
       data-testid={`btn-link-${id}`}
-      to={url}
+      href={url}
       aria-label={text || "Navigation link"}
       className={className}
       target={target}
       onClick={onClick}
     >
       {contents}
-    </Link>
+    </a>
   );
 }

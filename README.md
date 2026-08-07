@@ -10,7 +10,7 @@ software experience.
 
 ## Portfolio structure
 
-- Engineering-first hero and relocation status
+- Engineering-first hero and broad mobility / work availability
 - Engineering focus and capabilities
 - Detailed engineering project case studies
 - Categorized engineering tools, analysis, delivery, and programming skills
@@ -22,10 +22,10 @@ software experience.
 
 - React
 - TypeScript
-- React Router / hash navigation
+- Native single-page section navigation
 - Tailwind CSS
 - React Testing Library and Jest
-- Netlify-compatible routing and Formspree contact submission
+- Root canonical URL, legacy-path fallback, and Formspree contact submission
 
 ## Local development
 

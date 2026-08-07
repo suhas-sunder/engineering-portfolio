@@ -15,7 +15,7 @@ export const siteConfig = {
   driverLicence: "Valid Canadian driver's licence",
 
   // TODO: Replace null with the verified engineering-resume PDF URL or an
-  // imported engineering-resume asset. Do not point this at the legacy
-  // software-development resume in src/assets.
+  // imported engineering-resume asset. The inherited software-development
+  // resume was intentionally removed during the single-page cleanup.
   engineeringResumeUrl: null as string | null,
 };

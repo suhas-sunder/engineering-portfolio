@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import NavBtnData from "../../data/NavBtnData";
 import ResumeLink from "./ResumeLink";
@@ -40,8 +39,8 @@ export default function MobileNav() {
   return (
     <div className="xl:hidden">
       <div className="relative z-[80] flex min-h-[4.25rem] items-center justify-between gap-2 px-4 sm:px-6">
-        <Link
-          to="/"
+        <a
+          href="/"
           onClick={closeBurgerMenu}
           aria-label="Suhas Sunder engineering portfolio home"
           className="flex min-h-11 min-w-0 items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
@@ -57,7 +56,7 @@ export default function MobileNav() {
               Engineer-in-Training (EGBC)
             </span>
           </span>
-        </Link>
+        </a>
 
         <button
           ref={menuButtonRef}

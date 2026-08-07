@@ -4,10 +4,9 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { HashLink } from "react-router-hash-link";
 import ProfilePic from "../../assets/profile-pic.png";
 import { siteConfig } from "../../config/site";
-import handleScrollOffset from "../utility/handleScrollOffset";
+import { handleSectionLinkClick } from "../utility/handleScrollOffset";
 import ResumeLink from "../Navigation/ResumeLink";
 import Capabilities from "../Layout/Capabilities";
 import Projects from "../Layout/Projects";
@@ -70,12 +69,11 @@ function Home() {
               BEng in Electrical Engineering and Management. Brings
               approximately three years of professional software-development
               and technical project-delivery experience, with strengths in
-              systems thinking, requirements analysis, testing,
-              troubleshooting, documentation, and cross-functional
-              collaboration. Project work spans embedded systems, electrical
-              fault detection, MATLAB/Simulink modelling, optimization, and
-              engineering project planning. Deliberately pursuing a long-term
-              engineering career and eventual P.Eng. licensure.
+              requirements analysis, testing, troubleshooting, documentation,
+              and cross-functional collaboration. Engineering project
+              experience includes modelling, optimization, embedded systems,
+              technical analysis, and project planning. Pursuing a long-term
+              engineering career and P.Eng. licensure.
             </p>
 
             <div className="mt-5 text-slate-700">
@@ -97,14 +95,16 @@ function Home() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ResumeLink />
-              <HashLink
-                to="/#contact"
-                scroll={(element) => handleScrollOffset(element)}
+              <a
+                href="/#contact"
+                onClick={(event) =>
+                  handleSectionLinkClick(event, "/#contact")
+                }
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-teal-700 bg-white px-4 py-2.5 text-sm font-bold text-teal-800 transition hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               >
                 Contact
                 <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
-              </HashLink>
+              </a>
               <a
                 href={siteConfig.linkedIn}
                 target="_blank"

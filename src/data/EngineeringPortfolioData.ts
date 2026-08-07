@@ -18,10 +18,10 @@ export interface EngineeringProject {
     caption: string;
     placeholder?: string;
   };
-  link?: {
+  links?: {
     label: string;
     url: string;
-  };
+  }[];
 }
 
 export const capabilityGroups = [
@@ -98,6 +98,12 @@ export const engineeringProjects: EngineeringProject[] = [
       caption:
         "Capstone prototype hardware and remote notification interfaces.",
     },
+    links: [
+      {
+        label: "View capstone demo video",
+        url: "https://drive.google.com/file/d/1kzKO8vva8IF2pJV-VUExGpKP8mYJUerR/view?usp=sharing",
+      },
+    ],
   },
   {
     number: "02",
@@ -201,10 +207,16 @@ export const engineeringProjects: EngineeringProject[] = [
       alt: "Smart Home Sensor Planner interface for configuring a multi-floor sensor layout",
       caption: "Deployed Sensor Planner layout-modelling interface.",
     },
-    link: {
-      label: "Visit SensorPlanner.com",
-      url: "https://www.sensorplanner.com",
-    },
+    links: [
+      {
+        label: "Visit SensorPlanner.com",
+        url: "https://www.sensorplanner.com",
+      },
+      {
+        label: "View Sensor Planner source",
+        url: "https://github.com/suhas-sunder/sensor-planner",
+      },
+    ],
   },
 ];
 

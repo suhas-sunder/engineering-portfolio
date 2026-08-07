@@ -1,14 +1,9 @@
 import { render, screen, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Home from "../Home";
-import { MemoryRouter } from "react-router-dom";
 
 const renderHome = () => {
-  render(
-    <MemoryRouter>
-      <Home />
-    </MemoryRouter>,
-  );
+  render(<Home />);
 };
 
 describe("engineering portfolio home", () => {
@@ -37,6 +32,11 @@ describe("engineering portfolio home", () => {
       within(hero).getByText(/valid canadian driver's licence/i),
     ).toBeInTheDocument();
     expect(
+      within(hero).getByText(
+        /engineering project experience includes modelling, optimization, embedded systems, technical analysis, and project planning/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
       within(hero).queryByText(/^electrical & computer engineering$/i),
     ).not.toBeInTheDocument();
     expect(within(hero).queryByText(/power systems/i)).not.toBeInTheDocument();
@@ -61,6 +61,18 @@ describe("engineering portfolio home", () => {
     ].forEach((name) => {
       expect(screen.getByRole("heading", { name })).toBeInTheDocument();
     });
+  });
+
+  it("retains the unique evidence links from the retired project pages", () => {
+    expect(
+      screen.getByRole("link", { name: /view capstone demo video/i }),
+    ).toHaveAttribute("href", expect.stringContaining("drive.google.com"));
+    expect(
+      screen.getByRole("link", { name: /view sensor planner source/i }),
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/suhas-sunder/sensor-planner",
+    );
   });
 
   it("renders verified project images and explicit evidence placeholders", () => {

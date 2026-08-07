@@ -1,14 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom";
 import App from "../App";
 
 const renderApp = () => {
-  render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  render(<App />);
 };
 
 describe("engineering portfolio application", () => {

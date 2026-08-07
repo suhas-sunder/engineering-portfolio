@@ -1,5 +1,4 @@
 import { useLayoutEffect } from "react";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Home from "./components/Pages/Home";
 import NavBar from "./components/Navigation/NavBar";
@@ -7,13 +6,11 @@ import Footer from "./components/Layout/Footer";
 import { siteConfig } from "./config/site";
 
 function App() {
-  const location = useLocation();
-
   useLayoutEffect(() => {
-    if (process.env.NODE_ENV !== "test" && !location.hash) {
+    if (process.env.NODE_ENV !== "test" && !window.location.hash) {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
-  }, [location.pathname, location.hash]);
+  }, []);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -95,33 +92,7 @@ function App() {
 
       <NavBar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="*"
-          element={
-            <main className="flex min-h-[70vh] items-center bg-[#f7f6f2] px-5 py-24">
-              <div className="mx-auto w-full max-w-3xl border-l-4 border-teal-700 pl-6 sm:pl-10">
-                <p className="font-mono text-sm font-semibold tracking-widest text-teal-700">
-                  404
-                </p>
-                <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-                  Page not found
-                </h1>
-                <p className="mt-5 text-lg leading-8 text-slate-600">
-                  The requested page is not part of this engineering portfolio.
-                </p>
-                <Link
-                  to="/"
-                  className="mt-8 inline-flex min-h-11 items-center rounded-md bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
-                >
-                  Return to portfolio
-                </Link>
-              </div>
-            </main>
-          }
-        />
-      </Routes>
+      <Home />
 
       <Footer />
     </div>

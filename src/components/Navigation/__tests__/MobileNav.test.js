@@ -1,14 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import MobileNav from "../MobileNav";
-import { BrowserRouter } from "react-router-dom";
 
-const renderMobileNav = () =>
-  render(
-    <BrowserRouter>
-      <MobileNav />
-    </BrowserRouter>,
-  );
+const renderMobileNav = () => render(<MobileNav />);
 
 const expectedUrls = [
   "/",
