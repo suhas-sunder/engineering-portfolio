@@ -37,6 +37,16 @@ describe("engineering portfolio home", () => {
       ),
     ).toBeInTheDocument();
     expect(
+      within(hero).getByText(
+        /more than three years of professional software-development and technical project-delivery experience/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(hero).getByText(
+        /enjoys collaborative environments, taking on responsibility, and opportunities for continuous learning/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
       within(hero).queryByText(/^electrical & computer engineering$/i),
     ).not.toBeInTheDocument();
     expect(within(hero).queryByText(/power systems/i)).not.toBeInTheDocument();
@@ -287,6 +297,23 @@ describe("engineering portfolio home", () => {
     ).toBeInTheDocument();
     expect(
       screen.queryByText("Nov 2023 - May 2024 | Nov 2024 - Jun 2025"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("describes professional experience as more than three years", () => {
+    const experience = document.getElementById("experience");
+    expect(experience).not.toBeNull();
+    if (!experience) {
+      throw new Error("Expected professional experience section");
+    }
+
+    expect(
+      within(experience).getByText(
+        /more than three years of professional software-development and technical project-delivery experience/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(experience).queryByText(/approximately three years/i),
     ).not.toBeInTheDocument();
   });
 

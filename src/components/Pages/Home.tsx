@@ -60,14 +60,16 @@ function Home() {
 
             <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
               Completed an MEng in Electrical and Computer Engineering and a
-              BEng in Electrical Engineering and Management. Brings
-              approximately three years of professional software-development and
-              technical project-delivery experience, with strengths in
-              requirements analysis, testing, troubleshooting, documentation,
-              and cross-functional collaboration. Engineering project experience
-              includes modelling, optimization, embedded systems, technical
-              analysis, and project planning. Pursuing a long-term engineering
-              career and P.Eng. licensure.
+              BEng in Electrical Engineering and Management. Brings more than
+              three years of professional software-development and technical
+              project-delivery experience, with strengths in requirements
+              analysis, testing, troubleshooting, documentation, and
+              cross-functional collaboration. Enjoys collaborative
+              environments, taking on responsibility, and opportunities for
+              continuous learning. Engineering project experience includes
+              modelling, optimization, embedded systems, technical analysis,
+              and project planning. Pursuing a long-term engineering career and
+              P.Eng. licensure.
             </p>
 
             <div className="mt-5 text-slate-700">

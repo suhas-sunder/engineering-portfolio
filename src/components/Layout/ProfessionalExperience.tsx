@@ -13,7 +13,7 @@ export default function ProfessionalExperience() {
           <SectionHeading
             eyebrow="Experience"
             title="Professional Experience"
-            description="Approximately three years of software development and technical project-delivery experience."
+            description="More than three years of professional software-development and technical project-delivery experience."
           />
         </div>
 
