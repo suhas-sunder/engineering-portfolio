@@ -219,8 +219,8 @@ export const engineeringProjects: EngineeringProject[] = [
     },
     links: [
       {
-        label: "Visit SensorPlanner.com",
-        url: "https://www.sensorplanner.com",
+        label: "Visit Sensor Planner",
+        url: "https://sensor-planner.netlify.app/",
       },
       {
         label: "View Sensor Planner source",

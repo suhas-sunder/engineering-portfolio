@@ -103,6 +103,10 @@ describe("engineering portfolio home", () => {
     expect(
       screen.getByRole("link", { name: /view sensor planner source/i }),
     ).toHaveAttribute("href", "https://github.com/suhas-sunder/sensor-planner");
+    expect(
+      screen.getByRole("link", { name: /visit sensor planner/i }),
+    ).toHaveAttribute("href", "https://sensor-planner.netlify.app/");
+    expect(document.body.innerHTML).not.toContain("www.sensorplanner.com");
   });
 
   it("renders verified project images without fabricated evidence placeholders", () => {
@@ -199,6 +203,18 @@ describe("engineering portfolio home", () => {
     expect(screen.getByTestId("sensor-planner-evidence").className).toContain(
       "2xl:grid-cols-2",
     );
+    expect(screen.getByTestId("arc-fault-evidence").className).toContain(
+      "max-w-[82rem]",
+    );
+    expect(screen.getByTestId("bev-simulation-evidence").className).toContain(
+      "max-w-[96rem]",
+    );
+    expect(screen.getByTestId("projects-container").className).toContain(
+      "max-w-[100rem]",
+    );
+    screen.getAllByTestId("project-intro").forEach((intro) => {
+      expect(intro.className).toContain("max-w-[68rem]");
+    });
   });
 
   it("provides stable anchors for projects and employers", () => {

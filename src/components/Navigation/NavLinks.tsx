@@ -36,11 +36,11 @@ export default function NavLinks({
 
   const className =
     type === "mobile-menu-link"
-      ? "flex min-h-12 w-full items-center justify-between border-b border-slate-300 px-2 py-3 text-base font-semibold text-slate-800 transition hover:border-teal-700 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+      ? "flex min-h-14 w-full items-center px-1 py-3 text-base font-semibold text-slate-900 transition hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-700"
       : type === "mobile-parent-link"
         ? "flex min-h-12 min-w-0 flex-1 items-center px-2 py-3 text-base font-semibold text-slate-900 transition hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
         : type === "mobile-submenu-link"
-          ? "flex min-h-11 w-full items-center border-b border-slate-200 bg-white/70 px-5 py-2.5 text-base font-semibold text-slate-800 transition hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+          ? "ml-1 flex min-h-12 w-[calc(100%-0.25rem)] items-center border-l-2 border-slate-300 px-5 py-2.5 text-[0.95rem] font-semibold text-slate-700 transition hover:border-teal-700 hover:bg-white/70 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-700"
           : type === "nav-submenu-link"
             ? "flex min-h-11 w-full items-center px-4 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-700"
             : type === "nav-link"

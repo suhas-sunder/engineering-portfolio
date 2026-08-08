@@ -10,9 +10,9 @@ function ProjectEvidence({ project }: { project: EngineeringProject }) {
   if (!project.evidence?.images.length) return null;
 
   const galleryClass = {
-    single: "max-w-5xl",
-    stacked: "max-w-[76rem]",
-    "wide-pair": "max-w-[76rem] 2xl:max-w-none 2xl:grid-cols-2",
+    single: "max-w-[82rem]",
+    stacked: "max-w-[96rem]",
+    "wide-pair": "max-w-[96rem] 2xl:max-w-none 2xl:grid-cols-2",
   }[project.evidence.layout];
 
   return (
@@ -55,7 +55,7 @@ function ProjectArticle({ project }: { project: EngineeringProject }) {
       aria-labelledby={`${project.id}-heading`}
     >
       <div className="min-w-0">
-        <div className="max-w-5xl">
+        <div className="max-w-[68rem]" data-testid="project-intro">
           <h3
             id={`${project.id}-heading`}
             className="text-3xl font-semibold leading-tight tracking-[-0.035em] text-slate-950 sm:text-4xl"
@@ -95,7 +95,7 @@ function ProjectArticle({ project }: { project: EngineeringProject }) {
 
         {hasVisualEvidence ? <ProjectEvidence project={project} /> : null}
 
-        <div className="max-w-5xl">
+        <div className="max-w-[82rem]" data-testid="project-support">
           <dl className="mt-10 grid gap-6 border-y border-slate-300 py-6 sm:grid-cols-2 sm:gap-8">
             <div>
               <dt className="text-sm font-bold uppercase tracking-[0.14em] text-slate-700">
@@ -153,7 +153,10 @@ export default function Projects() {
       className="anchor-target bg-[#eef1f0] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
       aria-labelledby="projects-heading"
     >
-      <div className="mx-auto w-full max-w-[82rem]">
+      <div
+        className="mx-auto w-full max-w-[100rem]"
+        data-testid="projects-container"
+      >
         <div id="projects-heading">
           <SectionHeading
             eyebrow="Projects"

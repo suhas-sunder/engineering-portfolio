@@ -1,88 +1,163 @@
 import "@testing-library/jest-dom";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import MobileNav from "../MobileNav";
 import { siteConfig } from "../../../config/site";
 
+const mediaListeners = new Map();
+
+const installMatchMedia = () => {
+  mediaListeners.clear();
+  Object.defineProperty(window, "matchMedia", {
+    configurable: true,
+    writable: true,
+    value: jest.fn().mockImplementation((query) => {
+      const listeners = new Set();
+      mediaListeners.set(query, listeners);
+      return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addEventListener: (_type, listener) => listeners.add(listener),
+        removeEventListener: (_type, listener) => listeners.delete(listener),
+        addListener: (listener) => listeners.add(listener),
+        removeListener: (listener) => listeners.delete(listener),
+        dispatchEvent: jest.fn(),
+      };
+    }),
+  });
+};
+
 const renderMobileNav = () => render(<MobileNav />);
 
-const expectedUrls = [
-  "/",
-  "/#skills",
-  "/#projects",
-  "/#education",
-  "/#experience",
-  "/#contact",
-  siteConfig.resumeUrl,
-];
-
 describe("mobile navigation", () => {
-  it("defaults to a closed menu with only the home link", () => {
-    renderMobileNav();
-    const links = screen.getAllByRole("link");
-
-    expect(screen.getByTestId(/burgerBtn-open/i)).toBeInTheDocument();
-    expect(links).toHaveLength(1);
-    expect(links[0]).toHaveAttribute("href", "/");
+  beforeEach(() => {
+    installMatchMedia();
+    jest
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation((callback) => {
+        callback(0);
+        return 0;
+      });
   });
 
-  it("opens the menu with all section links and one concise resume control", () => {
-    renderMobileNav();
-    fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
-
-    const links = screen.getAllByRole("link");
-    expect(links).toHaveLength(expectedUrls.length);
-    links.forEach((link, index) =>
-      expect(link).toHaveAttribute("href", expectedUrls[index]),
-    );
-    const resumeLink = screen.getByTestId("resume-link");
-    expect(resumeLink).toHaveTextContent(/^Resume$/);
-    expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
-    expect(resumeLink).toHaveAttribute("target", "_blank");
-    expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
-    expect(screen.queryByText(/pdf|pending|download/i)).not.toBeInTheDocument();
+  afterEach(() => {
+    jest.restoreAllMocks();
+    document.body.style.overflow = "";
   });
 
-  it("expands project and experience destinations without hover", () => {
+  it("defaults to a closed menu with no hidden navigation destinations", () => {
     renderMobileNav();
-    fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
 
-    fireEvent.click(
-      screen.getByRole("button", { name: /show projects links/i }),
+    expect(screen.getByTestId("burgerBtn-open")).toBeInTheDocument();
+    expect(screen.getAllByRole("link")).toHaveLength(1);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.queryByText("Skills")).not.toBeInTheDocument();
+  });
+
+  it("opens a modal navigation sheet, locks background scroll, and focuses Skills", () => {
+    renderMobileNav();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+
+    expect(screen.getByRole("dialog", { name: /navigation/i })).toHaveAttribute(
+      "aria-modal",
+      "true",
     );
+    expect(screen.getByRole("link", { name: "Skills" })).toHaveFocus();
+    expect(document.body.style.overflow).toBe("hidden");
+    expect(screen.getByTestId("resume-link")).toHaveAttribute(
+      "href",
+      siteConfig.resumeUrl,
+    );
+  });
+
+  it("uses full-row, mutually exclusive Projects and Experience disclosures", () => {
+    renderMobileNav();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+
+    const projects = screen.getByTestId("mobile-disclosure-nav-projects");
+    const experience = screen.getByTestId(
+      "mobile-disclosure-nav-experience",
+    );
+    expect(projects).toHaveTextContent(/^Projects$/i);
+    expect(projects).toHaveAttribute("aria-expanded", "false");
+    expect(
+      screen.queryByRole("link", { name: /arc fault detection/i }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(projects);
+    expect(projects).toHaveAttribute("aria-expanded", "true");
     expect(
       screen.getByRole("link", { name: /arc fault detection/i }),
     ).toHaveAttribute("href", "/#arc-fault");
-    expect(
-      screen.getByRole("link", { name: /sensor planner/i }),
-    ).toHaveAttribute("href", "/#sensor-planner");
 
-    fireEvent.click(
-      screen.getByRole("button", { name: /show experience links/i }),
-    );
+    fireEvent.click(experience);
+    expect(experience).toHaveAttribute("aria-expanded", "true");
+    expect(projects).toHaveAttribute("aria-expanded", "false");
+    expect(
+      screen.queryByRole("link", { name: /arc fault detection/i }),
+    ).not.toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: /dobson partners/i }),
     ).toHaveAttribute("href", "/#dobson-partners");
-    expect(screen.getByRole("link", { name: /eme group/i })).toHaveAttribute(
-      "href",
-      "/#eme-group",
-    );
   });
 
-  it("closes from the menu button and background overlay", () => {
+  it("closes from the close control and restores the previous scroll state", () => {
+    document.body.style.overflow = "auto";
     renderMobileNav();
-    fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
-    fireEvent.click(screen.getByTestId(/burgerBtn-close/i));
-    expect(screen.queryByTestId("mobile-nav-bkgd")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+    fireEvent.click(screen.getByTestId("burgerBtn-close"));
 
-    fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
-    fireEvent.click(screen.getByTestId("mobile-nav-bkgd"));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe("auto");
+    expect(screen.getByTestId("burgerBtn-open")).toHaveFocus();
+  });
+
+  it("closes with Escape and returns focus to the menu trigger", () => {
+    renderMobileNav();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+    fireEvent.keyDown(window, { key: "Escape" });
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.getByTestId("burgerBtn-open")).toHaveFocus();
+    expect(document.body.style.overflow).toBe("");
+  });
+
+  it("closes after selecting a destination and removes hidden items from focus order", () => {
+    renderMobileNav();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+    fireEvent.click(screen.getByRole("link", { name: "Education" }));
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.queryByText("Contact")).not.toBeInTheDocument();
     expect(screen.getAllByRole("link")).toHaveLength(1);
   });
 
-  it("closes when Escape is pressed", () => {
+  it("clears open mobile state when the desktop breakpoint becomes active", () => {
     renderMobileNav();
-    fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
-    fireEvent.keyDown(window, { key: "Escape" });
-    expect(screen.getByTestId(/burgerBtn-open/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+    fireEvent.click(screen.getByTestId("mobile-disclosure-nav-projects"));
+
+    const listeners = mediaListeners.get("(min-width: 1024px)");
+    act(() => {
+      listeners.forEach((listener) => listener({ matches: true }));
+    });
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe("");
+    expect(
+      screen.queryByRole("link", { name: /arc fault detection/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("keeps the Resume CTA reachable, accented, icon-labelled, and secure", () => {
+    renderMobileNav();
+    fireEvent.click(screen.getByTestId("burgerBtn-open"));
+    const resumeLink = screen.getByTestId("resume-link");
+
+    expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
+    expect(resumeLink).toHaveAttribute("target", "_blank");
+    expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(resumeLink.className).toContain("bg-teal-700");
+    expect(screen.getByTestId("resume-icon")).toBeInTheDocument();
   });
 });

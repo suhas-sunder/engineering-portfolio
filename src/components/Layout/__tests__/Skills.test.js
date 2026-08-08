@@ -18,6 +18,14 @@ describe("engineering skills", () => {
     expect(screen.queryByTestId(/skill-icon/i)).not.toBeInTheDocument();
   });
 
+  it("uses one, two, and four-column density without flattening categories", () => {
+    const grid = screen.getByTestId("skills-grid");
+
+    expect(grid.className).toContain("sm:grid-cols-2");
+    expect(grid.className).toContain("xl:grid-cols-4");
+    expect(grid.className).not.toContain("flex-wrap");
+  });
+
   it("includes engineering tools and the accurate AutoCAD Web label", () => {
     expect(screen.getByText("MATLAB")).toBeInTheDocument();
     expect(screen.getByText("Simulink")).toBeInTheDocument();

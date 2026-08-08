@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import MobileNav from "./MobileNav";
 import NavBtnData from "../../data/NavBtnData";
 import SideNav from "./SideNav";
@@ -5,13 +6,18 @@ import ResumeLink from "./ResumeLink";
 import DesktopNavItem from "./DesktopNavItem";
 
 export default function NavBar() {
+  const [openDesktopItem, setOpenDesktopItem] = useState<string | null>(null);
+  const handleDesktopOpenChange = useCallback((itemId: string | null) => {
+    setOpenDesktopItem(itemId);
+  }, []);
+
   return (
     <>
       <nav
         aria-label="Primary navigation"
-        className="sticky top-0 z-50 w-full border-b border-slate-300 bg-[#f7f6f2]/95 text-slate-900 shadow-[0_1px_0_rgba(15,23,42,0.03)] backdrop-blur"
+        className="sticky top-0 z-50 w-full border-b border-slate-300 bg-[#f7f6f2] text-slate-900 shadow-[0_1px_0_rgba(15,23,42,0.03)] lg:bg-[#f7f6f2]/95 lg:backdrop-blur"
       >
-        <div className="mx-auto hidden min-h-[4.5rem] w-full max-w-[88rem] items-center gap-6 px-6 xl:flex xl:px-10">
+        <div className="mx-auto hidden min-h-[4.5rem] w-full max-w-[100rem] items-center gap-3 px-6 lg:flex xl:gap-5 xl:px-8">
           <a
             href="/"
             aria-label="Suhas Sunder home"
@@ -32,7 +38,12 @@ export default function NavBar() {
 
           <ul className="ml-auto flex items-center">
             {NavBtnData.map((item) => (
-              <DesktopNavItem key={item.id} item={item} />
+              <DesktopNavItem
+                key={item.id}
+                item={item}
+                isOpen={openDesktopItem === item.id}
+                onOpenChange={handleDesktopOpenChange}
+              />
             ))}
           </ul>
 
