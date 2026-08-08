@@ -14,8 +14,7 @@ export const siteConfig = {
     "Open to relocation across Canada & the U.S. | Open to travel | On-site & hybrid",
   driverLicence: "Valid Canadian driver's licence",
 
-  // TODO: Replace null with the verified engineering-resume PDF URL or an
-  // imported engineering-resume asset. The inherited software-development
-  // resume was intentionally removed during the single-page cleanup.
-  engineeringResumeUrl: null as string | null,
+  // TODO: Paste the verified Google Drive resume page URL here.
+  // Do not replace this with a local PDF path.
+  resumeUrl: null as string | null,
 };

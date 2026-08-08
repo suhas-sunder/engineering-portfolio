@@ -107,7 +107,7 @@ export default function MobileNav() {
             </ul>
 
             <div className="mx-auto mt-4 w-full max-w-xl border-t border-slate-300 pt-4">
-              <ResumeLink variant="nav" />
+              <ResumeLink />
             </div>
           </div>
         </>

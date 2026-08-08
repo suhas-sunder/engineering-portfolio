@@ -23,7 +23,7 @@ describe("mobile navigation", () => {
     expect(links[0]).toHaveAttribute("href", "/");
   });
 
-  it("opens the menu with all section links and a pending resume control", () => {
+  it("opens the menu with all section links and one concise resume control", () => {
     renderMobileNav();
     fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
 
@@ -32,7 +32,10 @@ describe("mobile navigation", () => {
     links.forEach((link, index) =>
       expect(link).toHaveAttribute("href", expectedUrls[index]),
     );
-    expect(screen.getByTestId("engineering-resume-pending")).toBeDisabled();
+    const resumeButton = screen.getByTestId("resume-unconfigured");
+    expect(resumeButton).toBeDisabled();
+    expect(resumeButton).toHaveTextContent(/^Resume$/);
+    expect(screen.queryByText(/pdf|pending|download/i)).not.toBeInTheDocument();
   });
 
   it("closes from the menu button and background overlay", () => {

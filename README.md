@@ -44,12 +44,12 @@ npm run build
 ## Resume configuration
 
 The legacy software-development resume is intentionally not exposed. Add the
-verified engineering resume URL or asset in `src/config/site.ts` before enabling
-the prominent resume controls.
+verified Google Drive resume page URL to `resumeUrl` in `src/config/site.ts` to
+enable the single navigation Resume button.
 
 ## Content TODOs
 
-- Add the verified engineering-resume PDF.
+- Add the verified Google Drive resume page URL.
 - Add verified MATLAB/Simulink model screenshots, plots, or report excerpts.
 - Add verified engineering construction-planning artifacts such as the Gantt,
   WBS, or risk-register excerpt.

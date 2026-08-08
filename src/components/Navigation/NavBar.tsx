@@ -44,7 +44,7 @@ export default function NavBar() {
             ))}
           </ul>
 
-          <ResumeLink variant="nav" />
+          <ResumeLink />
         </div>
 
         <MobileNav />

@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import NavBar from "../NavBar";
+import { siteConfig } from "../../../config/site";
 
 const renderNavBar = () => render(<NavBar />);
 
@@ -37,11 +38,33 @@ describe("primary navigation", () => {
     ).toHaveLength(2);
   });
 
-  it("shows the resume control as pending without a legacy link", () => {
+  it("shows one navbar resume control with concise wording", () => {
     renderNavBar();
-    expect(
-      screen.getAllByTestId("engineering-resume-pending").length,
-    ).toBeGreaterThan(0);
-    expect(screen.queryByTestId("engineering-resume-link")).not.toBeInTheDocument();
+    const resumeButton = screen.getByRole("button", {
+      name: /resume link requires configuration/i,
+    });
+
+    expect(resumeButton).toBeDisabled();
+    expect(resumeButton).toHaveTextContent(/^Resume$/);
+    expect(screen.queryByText(/pdf|pending|download/i)).not.toBeInTheDocument();
+  });
+
+  it("opens the configured resume page in a secure new tab", () => {
+    const previousResumeUrl = siteConfig.resumeUrl;
+    siteConfig.resumeUrl = "https://drive.google.com/example-resume-page";
+
+    try {
+      renderNavBar();
+      const resumeLink = screen.getByRole("link", {
+        name: /open resume in a new tab/i,
+      });
+
+      expect(resumeLink).toHaveTextContent(/^Resume$/);
+      expect(resumeLink).toHaveAttribute("target", "_blank");
+      expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
+      expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
+    } finally {
+      siteConfig.resumeUrl = previousResumeUrl;
+    }
   });
 });

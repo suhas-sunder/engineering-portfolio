@@ -26,7 +26,7 @@ describe("engineering portfolio application", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /capabilities grounded in project work/i,
+        name: /technical skills/i,
       }),
     ).toBeInTheDocument();
     expect(

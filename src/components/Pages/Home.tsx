@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowRight,
+  faDiagramProject,
+  faEnvelope,
+  faGraduationCap,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import ProfilePic from "../../assets/profile-pic.png";
 import { siteConfig } from "../../config/site";
 import { handleSectionLinkClick } from "../utility/handleScrollOffset";
-import ResumeLink from "../Navigation/ResumeLink";
-import Capabilities from "../Layout/Capabilities";
 import Projects from "../Layout/Projects";
 import Skills from "../Layout/Skills";
 import Education from "../Layout/Education";
@@ -93,28 +93,58 @@ function Home() {
               </p>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <ResumeLink />
+            <nav
+              aria-label="Portfolio shortcuts"
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
+              <a
+                href={siteConfig.linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open LinkedIn profile"
+                title="LinkedIn"
+                data-testid="hero-quick-link"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-slate-300 bg-white text-lg text-slate-700 shadow-sm transition hover:border-teal-700 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+              >
+                <FontAwesomeIcon icon={faLinkedin} aria-hidden="true" />
+              </a>
+              <a
+                href="/#projects"
+                onClick={(event) =>
+                  handleSectionLinkClick(event, "/#projects")
+                }
+                aria-label="View engineering projects"
+                title="Projects"
+                data-testid="hero-quick-link"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-slate-300 bg-white text-lg text-slate-700 shadow-sm transition hover:border-teal-700 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+              >
+                <FontAwesomeIcon icon={faDiagramProject} aria-hidden="true" />
+              </a>
+              <a
+                href="/#education"
+                onClick={(event) =>
+                  handleSectionLinkClick(event, "/#education")
+                }
+                aria-label="View education and credentials"
+                title="Education & credentials"
+                data-testid="hero-quick-link"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-slate-300 bg-white text-lg text-slate-700 shadow-sm transition hover:border-teal-700 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+              >
+                <FontAwesomeIcon icon={faGraduationCap} aria-hidden="true" />
+              </a>
               <a
                 href="/#contact"
                 onClick={(event) =>
                   handleSectionLinkClick(event, "/#contact")
                 }
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-teal-700 bg-white px-4 py-2.5 text-sm font-bold text-teal-800 transition hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+                aria-label="Go to contact section"
+                title="Contact"
+                data-testid="hero-quick-link"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-slate-300 bg-white text-lg text-slate-700 shadow-sm transition hover:border-teal-700 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               >
-                Contact
-                <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+                <FontAwesomeIcon icon={faEnvelope} aria-hidden="true" />
               </a>
-              <a
-                href={siteConfig.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-3 py-2.5 text-sm font-bold text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
-              >
-                <FontAwesomeIcon icon={faLinkedin} aria-hidden="true" />
-                LinkedIn
-              </a>
-            </div>
+            </nav>
 
             <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-slate-600">
               <a
@@ -142,7 +172,6 @@ function Home() {
       </header>
 
       <main id="main-content">
-        <Capabilities />
         <Projects />
         <Skills />
         <Education />

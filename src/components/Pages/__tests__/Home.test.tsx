@@ -52,6 +52,28 @@ describe("engineering portfolio home", () => {
     ).toBeInTheDocument();
   });
 
+  it("renders four compact hero shortcuts without a duplicate resume control", () => {
+    const hero = screen.getByRole("banner");
+    const shortcuts = within(hero).getAllByTestId("hero-quick-link");
+
+    expect(shortcuts).toHaveLength(4);
+    expect(
+      within(hero).getByRole("link", { name: /open linkedin profile/i }),
+    ).toHaveAttribute("target", "_blank");
+    expect(
+      within(hero).getByRole("link", { name: /view engineering projects/i }),
+    ).toHaveAttribute("href", "/#projects");
+    expect(
+      within(hero).getByRole("link", {
+        name: /view education and credentials/i,
+      }),
+    ).toHaveAttribute("href", "/#education");
+    expect(
+      within(hero).getByRole("link", { name: /go to contact section/i }),
+    ).toHaveAttribute("href", "/#contact");
+    expect(within(hero).queryByText(/^resume$/i)).not.toBeInTheDocument();
+  });
+
   it("renders all four engineering projects", () => {
     [
       /arc fault detection system/i,
@@ -113,10 +135,10 @@ describe("engineering portfolio home", () => {
     ).toBe(true);
   });
 
-  it("does not expose the legacy software resume", () => {
-    expect(
-      screen.getByRole("button", { name: /engineering résumé pdf is pending/i }),
-    ).toBeDisabled();
-    expect(screen.queryByTestId("engineering-resume-link")).not.toBeInTheDocument();
+  it("does not expose PDF or pending resume wording in the hero", () => {
+    const hero = screen.getByRole("banner");
+
+    expect(within(hero).queryByText(/pdf pending/i)).not.toBeInTheDocument();
+    expect(within(hero).queryByText(/engineering résumé/i)).not.toBeInTheDocument();
   });
 });

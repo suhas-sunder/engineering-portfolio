@@ -24,45 +24,6 @@ export interface EngineeringProject {
   }[];
 }
 
-export const capabilityGroups = [
-  {
-    title: "Engineering analysis",
-    description:
-      "Structured technical problem-solving developed through graduate and undergraduate engineering work.",
-    items: [
-      "Systems modelling",
-      "Engineering calculations",
-      "Optimization",
-      "Testing",
-      "Troubleshooting",
-    ],
-  },
-  {
-    title: "Electrical & systems exposure",
-    description:
-      "Academic and project exposure across electrical, embedded, vehicle, and connected systems.",
-    items: [
-      "Electrical and computer engineering",
-      "Electric vehicle systems",
-      "Embedded systems",
-      "Fault detection",
-      "Systems integration",
-    ],
-  },
-  {
-    title: "Project delivery",
-    description:
-      "Planning and coordination practices applied in engineering projects and professional technical delivery.",
-    items: [
-      "Requirements analysis",
-      "WBS and Gantt scheduling",
-      "Critical path analysis",
-      "Risk registers and RPN",
-      "Technical documentation",
-      "Stakeholder coordination",
-    ],
-  },
-];
 export const engineeringProjects: EngineeringProject[] = [
   {
     number: "01",
@@ -222,12 +183,11 @@ export const engineeringProjects: EngineeringProject[] = [
 
 export const skillGroups = [
   {
-    title: "Engineering tools",
-    note: "Working exposure; AutoCAD experience is specifically AutoCAD Web.",
+    title: "ENGINEERING TOOLS",
     items: ["MATLAB", "Simulink", "AutoCAD Web", "Siemens NX"],
   },
   {
-    title: "Engineering analysis",
+    title: "ENGINEERING ANALYSIS",
     items: [
       "Systems modelling",
       "Optimization",
@@ -237,8 +197,9 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Project delivery",
+    title: "PROJECT DELIVERY",
     items: [
+      "Requirements analysis",
       "WBS",
       "Gantt scheduling",
       "Critical path analysis",
@@ -249,8 +210,7 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Programming & data",
-    note: "A supporting differentiator within an engineering-first profile.",
+    title: "PROGRAMMING & DATA",
     items: [
       "Python",
       "SQL",

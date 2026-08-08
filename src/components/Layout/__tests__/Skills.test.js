@@ -8,7 +8,7 @@ describe("engineering skills", () => {
   it("renders the categorized skills heading", () => {
     expect(
       screen.getByRole("heading", {
-        name: /engineering capability, clearly categorized/i,
+        name: /technical skills/i,
       }),
     ).toBeInTheDocument();
   });
@@ -23,5 +23,23 @@ describe("engineering skills", () => {
     expect(screen.getByText("Simulink")).toBeInTheDocument();
     expect(screen.getByText("AutoCAD Web")).toBeInTheDocument();
     expect(screen.queryByText(/^AutoCAD$/)).not.toBeInTheDocument();
+  });
+
+  it("uses the four requested resume-style categories without disclaimers", () => {
+    [
+      "ENGINEERING TOOLS",
+      "ENGINEERING ANALYSIS",
+      "PROJECT DELIVERY",
+      "PROGRAMMING & DATA",
+    ].forEach((category) => {
+      expect(
+        screen.getByRole("heading", { name: category }),
+      ).toBeInTheDocument();
+    });
+
+    expect(screen.getByText("Requirements analysis")).toBeInTheDocument();
+    expect(
+      screen.queryByText(/academic|transferable|working exposure/i),
+    ).not.toBeInTheDocument();
   });
 });
