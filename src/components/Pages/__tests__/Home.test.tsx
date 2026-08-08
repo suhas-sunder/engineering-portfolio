@@ -40,7 +40,9 @@ describe("engineering portfolio home", () => {
       within(hero).queryByText(/^electrical & computer engineering$/i),
     ).not.toBeInTheDocument();
     expect(within(hero).queryByText(/power systems/i)).not.toBeInTheDocument();
-    expect(within(hero).queryByText(/relocating to vancouver/i)).not.toBeInTheDocument();
+    expect(
+      within(hero).queryByText(/relocating to vancouver/i),
+    ).not.toBeInTheDocument();
     expect(
       within(hero).queryByText(/software developer/i),
     ).not.toBeInTheDocument();
@@ -72,6 +74,11 @@ describe("engineering portfolio home", () => {
       within(hero).getByRole("link", { name: /go to contact section/i }),
     ).toHaveAttribute("href", "/#contact");
     expect(within(hero).queryByText(/^resume$/i)).not.toBeInTheDocument();
+    expect(within(hero).queryByText(/suhas@live\.ca/i)).not.toBeInTheDocument();
+    expect(within(hero).queryByText(/647.*242.*2969/i)).not.toBeInTheDocument();
+    expect(
+      within(hero).queryByText(/suhassunder\.ca/i),
+    ).not.toBeInTheDocument();
   });
 
   it("renders all four engineering projects", () => {
@@ -91,20 +98,57 @@ describe("engineering portfolio home", () => {
     ).toHaveAttribute("href", expect.stringContaining("drive.google.com"));
     expect(
       screen.getByRole("link", { name: /view sensor planner source/i }),
-    ).toHaveAttribute(
-      "href",
-      "https://github.com/suhas-sunder/sensor-planner",
-    );
+    ).toHaveAttribute("href", "https://github.com/suhas-sunder/sensor-planner");
   });
 
-  it("renders verified project images and explicit evidence placeholders", () => {
+  it("renders verified project images without fabricated evidence placeholders", () => {
     expect(
       screen.getByAltText(/arc fault detection capstone prototype/i),
     ).toBeInTheDocument();
     expect(
       screen.getByAltText(/smart home sensor planner interface/i),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/evidence placeholder/i)).toHaveLength(2);
+    expect(screen.queryByText(/evidence placeholder/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/no illustrative or fabricated/i),
+    ).not.toBeInTheDocument();
+  });
+
+  it("provides stable anchors for projects and employers", () => {
+    [
+      "arc-fault",
+      "bev-simulation",
+      "construction-planning",
+      "sensor-planner",
+      "dobson-partners",
+      "ats-group",
+      "eme-group",
+    ].forEach((id) => {
+      expect(document.getElementById(id)).toBeInTheDocument();
+      expect(document.getElementById(id)).toHaveClass("anchor-target");
+    });
+  });
+
+  it("shows skills before projects and removes decorative numbering", () => {
+    const skills = document.getElementById("skills");
+    const projects = document.getElementById("projects");
+
+    expect(skills).not.toBeNull();
+    expect(projects).not.toBeNull();
+    if (!skills || !projects) throw new Error("Expected portfolio sections");
+
+    expect(
+      skills.compareDocumentPosition(projects) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(
+      /\b(?:PROJECT|DEGREE|EXPERIENCE) 0\d\b/,
+    );
+    expect(document.body.textContent).not.toMatch(/\d{2} \/ \d{2}/);
+  });
+
+  it("contains no visible em dash characters", () => {
+    expect(document.body.textContent).not.toContain("—");
   });
 
   it("renders engineering education without duplicated BEng coursework", () => {
@@ -139,6 +183,8 @@ describe("engineering portfolio home", () => {
     const hero = screen.getByRole("banner");
 
     expect(within(hero).queryByText(/pdf pending/i)).not.toBeInTheDocument();
-    expect(within(hero).queryByText(/engineering résumé/i)).not.toBeInTheDocument();
+    expect(
+      within(hero).queryByText(/engineering résumé/i),
+    ).not.toBeInTheDocument();
   });
 });

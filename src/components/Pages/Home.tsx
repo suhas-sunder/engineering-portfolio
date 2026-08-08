@@ -20,7 +20,7 @@ function Home() {
     <>
       <header
         id="about"
-        className="relative overflow-hidden border-b border-slate-200 bg-[#f7f6f2] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20"
+        className="anchor-target relative overflow-hidden border-b border-slate-200 bg-[#f7f6f2] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20"
       >
         <div
           className="pointer-events-none absolute inset-y-0 right-[8%] hidden w-px bg-slate-200 xl:block"
@@ -67,17 +67,17 @@ function Home() {
             <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
               Completed an MEng in Electrical and Computer Engineering and a
               BEng in Electrical Engineering and Management. Brings
-              approximately three years of professional software-development
-              and technical project-delivery experience, with strengths in
+              approximately three years of professional software-development and
+              technical project-delivery experience, with strengths in
               requirements analysis, testing, troubleshooting, documentation,
-              and cross-functional collaboration. Engineering project
-              experience includes modelling, optimization, embedded systems,
-              technical analysis, and project planning. Pursuing a long-term
-              engineering career and P.Eng. licensure.
+              and cross-functional collaboration. Engineering project experience
+              includes modelling, optimization, embedded systems, technical
+              analysis, and project planning. Pursuing a long-term engineering
+              career and P.Eng. licensure.
             </p>
 
             <div className="mt-5 text-slate-700">
-              <p className="flex items-start gap-3 text-sm font-semibold sm:text-base">
+              <p className="flex items-start gap-3 text-base font-semibold">
                 <FontAwesomeIcon
                   icon={faLocationDot}
                   className="mt-1 text-teal-700"
@@ -85,10 +85,10 @@ function Home() {
                 />
                 <span>{siteConfig.location}</span>
               </p>
-              <p className="mt-3 max-w-4xl text-sm font-semibold leading-6 sm:text-base">
+              <p className="mt-3 max-w-4xl text-base font-semibold leading-7">
                 {siteConfig.availability}
               </p>
-              <p className="mt-2 text-sm font-medium text-slate-600">
+              <p className="mt-2 text-base font-medium leading-7 text-slate-700">
                 {siteConfig.driverLicence}
               </p>
             </div>
@@ -110,9 +110,7 @@ function Home() {
               </a>
               <a
                 href="/#projects"
-                onClick={(event) =>
-                  handleSectionLinkClick(event, "/#projects")
-                }
+                onClick={(event) => handleSectionLinkClick(event, "/#projects")}
                 aria-label="View engineering projects"
                 title="Projects"
                 data-testid="hero-quick-link"
@@ -134,9 +132,7 @@ function Home() {
               </a>
               <a
                 href="/#contact"
-                onClick={(event) =>
-                  handleSectionLinkClick(event, "/#contact")
-                }
+                onClick={(event) => handleSectionLinkClick(event, "/#contact")}
                 aria-label="Go to contact section"
                 title="Contact"
                 data-testid="hero-quick-link"
@@ -145,35 +141,13 @@ function Home() {
                 <FontAwesomeIcon icon={faEnvelope} aria-hidden="true" />
               </a>
             </nav>
-
-            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold text-slate-600">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="inline-flex min-h-10 items-center underline decoration-slate-300 underline-offset-4 transition hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
-              >
-                {siteConfig.email}
-              </a>
-              <a
-                href={siteConfig.phoneHref}
-                className="inline-flex min-h-10 items-center underline decoration-slate-300 underline-offset-4 transition hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
-              >
-                {siteConfig.phoneDisplay}
-              </a>
-              <a
-                href={siteConfig.url}
-                className="inline-flex min-h-10 items-center underline decoration-slate-300 underline-offset-4 transition hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
-              >
-                suhassunder.ca
-              </a>
-            </div>
-
           </div>
         </div>
       </header>
 
       <main id="main-content">
-        <Projects />
         <Skills />
+        <Projects />
         <Education />
         <ProfessionalExperience />
         <Contact />

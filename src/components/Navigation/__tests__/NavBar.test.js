@@ -1,13 +1,13 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import NavBar from "../NavBar";
 import { siteConfig } from "../../../config/site";
 
 const renderNavBar = () => render(<NavBar />);
 
 const expectedUrls = [
-  "/#projects",
   "/#skills",
+  "/#projects",
   "/#education",
   "/#experience",
   "/#contact",
@@ -29,6 +29,52 @@ describe("primary navigation", () => {
     links.forEach((link, index) =>
       expect(link).toHaveAttribute("href", expectedUrls[index]),
     );
+  });
+
+  it("opens project and experience dropdowns with direct anchors", () => {
+    renderNavBar();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /show projects links/i }),
+    );
+    const projectsMenu = screen.getByRole("list", { name: /projects links/i });
+    expect(
+      within(projectsMenu).getByRole("link", { name: /arc fault detection/i }),
+    ).toHaveAttribute("href", "/#arc-fault");
+    expect(
+      within(projectsMenu).getByRole("link", { name: /bev simulation/i }),
+    ).toHaveAttribute("href", "/#bev-simulation");
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /show experience links/i }),
+    );
+    const experienceMenu = screen.getByRole("list", {
+      name: /experience links/i,
+    });
+    expect(
+      within(experienceMenu).getByRole("link", { name: /dobson partners/i }),
+    ).toHaveAttribute("href", "/#dobson-partners");
+    expect(
+      within(experienceMenu).getByRole("link", { name: /ats group/i }),
+    ).toHaveAttribute("href", "/#ats-group");
+    expect(
+      within(experienceMenu).getByRole("link", { name: /eme group/i }),
+    ).toHaveAttribute("href", "/#eme-group");
+  });
+
+  it("closes an open dropdown with Escape", () => {
+    renderNavBar();
+    fireEvent.click(
+      screen.getByRole("button", { name: /show projects links/i }),
+    );
+    fireEvent.keyDown(document, { key: "Escape" });
+
+    expect(
+      screen.queryByRole("list", { name: /projects links/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /show projects links/i }),
+    ).toHaveFocus();
   });
 
   it("identifies the professional designation with the regulator", () => {

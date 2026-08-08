@@ -6,8 +6,8 @@ const renderMobileNav = () => render(<MobileNav />);
 
 const expectedUrls = [
   "/",
-  "/#projects",
   "/#skills",
+  "/#projects",
   "/#education",
   "/#experience",
   "/#contact",
@@ -36,6 +36,32 @@ describe("mobile navigation", () => {
     expect(resumeButton).toBeDisabled();
     expect(resumeButton).toHaveTextContent(/^Resume$/);
     expect(screen.queryByText(/pdf|pending|download/i)).not.toBeInTheDocument();
+  });
+
+  it("expands project and experience destinations without hover", () => {
+    renderMobileNav();
+    fireEvent.click(screen.getByTestId(/burgerBtn-open/i));
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /show projects links/i }),
+    );
+    expect(
+      screen.getByRole("link", { name: /arc fault detection/i }),
+    ).toHaveAttribute("href", "/#arc-fault");
+    expect(
+      screen.getByRole("link", { name: /sensor planner/i }),
+    ).toHaveAttribute("href", "/#sensor-planner");
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /show experience links/i }),
+    );
+    expect(
+      screen.getByRole("link", { name: /dobson partners/i }),
+    ).toHaveAttribute("href", "/#dobson-partners");
+    expect(screen.getByRole("link", { name: /eme group/i })).toHaveAttribute(
+      "href",
+      "/#eme-group",
+    );
   });
 
   it("closes from the menu button and background overlay", () => {

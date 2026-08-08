@@ -1,4 +1,4 @@
-# Suhas Sunder — Engineering Portfolio
+# Suhas Sunder - Engineering Portfolio
 
 A purpose-built engineering portfolio for Suhas Sunder, Engineer-in-Training
 with Engineers and Geoscientists BC.
@@ -11,9 +11,8 @@ software experience.
 ## Portfolio structure
 
 - Engineering-first hero and broad mobility / work availability
-- Engineering focus and capabilities
-- Detailed engineering project case studies
-- Categorized engineering tools, analysis, delivery, and programming skills
+- Recruiter-readable technical skills grouped by tools, analysis, delivery, and programming
+- Engineering project case studies organized by objective, contribution, methods, and outcome
 - Education and EIT credential
 - Professional technical delivery experience
 - Accessible contact information and Formspree contact form

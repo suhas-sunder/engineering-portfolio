@@ -1,12 +1,20 @@
-const NavBtnData = [
-  {
-    id: "nav-projects",
-    url: "/#projects",
-    text: "Projects",
-    type: "nav-link",
-    typeMobile: "mobile-nav-link",
-    hashLink: true,
-  },
+export interface NavChildItem {
+  id: string;
+  url: string;
+  text: string;
+}
+
+export interface NavItem {
+  id: string;
+  url: string;
+  text: string;
+  type: "nav-link";
+  typeMobile: "mobile-nav-link";
+  hashLink: true;
+  children?: NavChildItem[];
+}
+
+const NavBtnData: NavItem[] = [
   {
     id: "nav-skills",
     url: "/#skills",
@@ -14,6 +22,24 @@ const NavBtnData = [
     type: "nav-link",
     typeMobile: "mobile-nav-link",
     hashLink: true,
+  },
+  {
+    id: "nav-projects",
+    url: "/#projects",
+    text: "Projects",
+    type: "nav-link",
+    typeMobile: "mobile-nav-link",
+    hashLink: true,
+    children: [
+      { id: "nav-arc-fault", url: "/#arc-fault", text: "Arc Fault Detection" },
+      { id: "nav-bev", url: "/#bev-simulation", text: "BEV Simulation" },
+      {
+        id: "nav-construction",
+        url: "/#construction-planning",
+        text: "Construction Planning",
+      },
+      { id: "nav-sensor", url: "/#sensor-planner", text: "Sensor Planner" },
+    ],
   },
   {
     id: "nav-education",
@@ -30,6 +56,15 @@ const NavBtnData = [
     type: "nav-link",
     typeMobile: "mobile-nav-link",
     hashLink: true,
+    children: [
+      {
+        id: "nav-dobson",
+        url: "/#dobson-partners",
+        text: "Dobson Partners",
+      },
+      { id: "nav-ats", url: "/#ats-group", text: "ATS Group" },
+      { id: "nav-eme", url: "/#eme-group", text: "EME Group" },
+    ],
   },
   {
     id: "nav-contact",

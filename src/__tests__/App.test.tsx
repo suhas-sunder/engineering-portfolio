@@ -31,12 +31,12 @@ describe("engineering portfolio application", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: /technical work, methods, and evidence/i,
+        name: /engineering projects/i,
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: /engineering education and eit registration/i,
+        name: /education & credentials/i,
       }),
     ).toBeInTheDocument();
   });

@@ -155,13 +155,12 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+      className="anchor-target bg-white px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
       aria-labelledby="contact-heading"
     >
       <div className="mx-auto w-full max-w-[82rem]">
         <div id="contact-heading">
           <SectionHeading
-            number="06 / 06"
             eyebrow="Contact"
             title="Start a conversation"
             description="Available for early-career engineering and EIT roles across Canada and the United States, with flexibility for travel, on-site, and hybrid work."
@@ -203,10 +202,10 @@ function Contact() {
                     <FontAwesomeIcon icon={detail.icon} aria-hidden="true" />
                   </span>
                   <span className="min-w-0 pt-0.5">
-                    <span className="block text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+                    <span className="block text-sm font-bold uppercase tracking-[0.12em] text-slate-700">
                       {detail.label}
                     </span>
-                    <span className="mt-1 block break-words text-sm font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 group-hover:text-teal-800 group-hover:decoration-teal-700">
+                    <span className="mt-1 block break-words text-base font-semibold leading-7 text-slate-900 underline decoration-slate-300 underline-offset-4 group-hover:text-teal-800 group-hover:decoration-teal-700">
                       {detail.value}
                     </span>
                   </span>
@@ -216,7 +215,7 @@ function Contact() {
 
             <a
               href={siteConfig.url}
-              className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+              className="mt-6 inline-flex min-h-11 items-center text-base font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
             >
               suhassunder.ca
             </a>
@@ -226,7 +225,7 @@ function Contact() {
             <h3 className="text-2xl font-semibold tracking-tight text-slate-950">
               Send a message
             </h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
+            <p className="mt-2 text-base leading-7 text-slate-700">
               Required fields are marked with an asterisk.
             </p>
 

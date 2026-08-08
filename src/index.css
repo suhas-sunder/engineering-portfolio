@@ -9,6 +9,7 @@
   --page-bg: #f7f6f2;
   --ink: #17212b;
   --accent: #0f766e;
+  --sticky-nav-offset: 6rem;
 }
 
 * {
@@ -19,7 +20,6 @@ html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
   overflow-x: clip;
 }
 
@@ -37,6 +37,10 @@ body {
 
 #root {
   min-width: 0;
+}
+
+.anchor-target {
+  scroll-margin-top: var(--sticky-nav-offset);
 }
 
 img,

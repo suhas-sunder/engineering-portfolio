@@ -2,21 +2,19 @@ import CapstoneImage from "../assets/capstone-proj-screenshot.jpg";
 import SensorPlannerImage from "../assets/sensor_planner.jpg";
 
 export interface EngineeringProject {
-  number: string;
+  id: string;
+  navLabel: string;
   title: string;
   context: string;
   role: string;
   objective: string;
   highlights: string[];
-  system: string;
-  constraints: string;
   outcome: string;
   methods: string[];
   evidence?: {
     image?: string;
     alt?: string;
     caption: string;
-    placeholder?: string;
   };
   links?: {
     label: string;
@@ -26,10 +24,11 @@ export interface EngineeringProject {
 
 export const engineeringProjects: EngineeringProject[] = [
   {
-    number: "01",
+    id: "arc-fault",
+    navLabel: "Arc Fault Detection",
     title: "Arc Fault Detection System",
     context: "Undergraduate capstone",
-    role: "Team Lead · 3-member engineering team",
+    role: "Team Lead | 3-member engineering team",
     objective:
       "Develop an Arduino-based prototype that detects predefined electrical arc-fault conditions and provides remote fault notification.",
     highlights: [
@@ -38,12 +37,8 @@ export const engineeringProjects: EngineeringProject[] = [
       "Developed an SQL-based logging system to record fault events and retrieve historical notification data.",
       "Coordinated hardware/software integration, testing, task allocation, and final project deliverables.",
     ],
-    system:
-      "Sensing → Arduino control → Wi-Fi / IFTTT notification → SQL event logging",
-    constraints:
-      "Academic prototype evaluated against predefined fault conditions; not professional protection-and-control work.",
     outcome:
-      "Completed integrated prototype, testing, remote notification, and historical event logging deliverables.",
+      "Integrated academic prototype supporting detection, notification, testing, and event logging.",
     methods: [
       "Arduino",
       "Embedded systems",
@@ -67,7 +62,8 @@ export const engineeringProjects: EngineeringProject[] = [
     ],
   },
   {
-    number: "02",
+    id: "bev-simulation",
+    navLabel: "BEV Simulation",
     title: "Hybrid Electric Vehicle / Battery Electric Vehicle Simulation",
     context: "MEng course project",
     role: "MATLAB / Simulink modelling",
@@ -79,12 +75,8 @@ export const engineeringProjects: EngineeringProject[] = [
       "Evaluated performance across UDDS, WLTP, and HWFET drive cycles.",
       "Quantified up to approximately 2% SOC recovery in urban driving and identified practical limitations of unconstrained energy-management models.",
     ],
-    system:
-      "Motor, inverter, battery, energy management, brake blending, and longitudinal vehicle dynamics",
-    constraints:
-      "Thermal limits, battery state of charge, inverter limits, and representative urban/highway drive cycles.",
     outcome:
-      "Measured regenerative-braking impact and documented the limitations of unconstrained energy-management assumptions.",
+      "Up to approximately 2% SOC recovery in urban driving, with practical limitations identified in unconstrained energy-management assumptions.",
     methods: [
       "MATLAB",
       "Simulink",
@@ -95,17 +87,13 @@ export const engineeringProjects: EngineeringProject[] = [
       "Regenerative braking",
       "Drive-cycle analysis",
     ],
-    evidence: {
-      caption: "Reserved for verified MATLAB/Simulink project evidence.",
-      placeholder:
-        "Model screenshots, drive-cycle plots, or report excerpts can be added here when supplied.",
-    },
   },
   {
-    number: "03",
+    id: "construction-planning",
+    navLabel: "Construction Planning",
     title: "Engineering Construction Planning",
     context: "MEng course project",
-    role: "Project Manager / Team Lead · 7-member engineering team",
+    role: "Project Manager / Team Lead | 7-member engineering team",
     objective:
       "Develop a complete project-management plan for a regulated construction project under fixed deadlines.",
     highlights: [
@@ -114,10 +102,6 @@ export const engineeringProjects: EngineeringProject[] = [
       "Covered permitting, procurement, construction, inspection, and closeout activities.",
       "Developed and maintained a quantitative RPN risk register across schedule, cost, safety, environmental, and regulatory risks.",
     ],
-    system:
-      "Integrated project controls spanning scope, schedule, cost, quality, procurement, stakeholders, risk, and change",
-    constraints:
-      "Fixed deadlines with mitigation planning aligned to the Ontario Building Code and OHSA.",
     outcome:
       "Delivered an integrated management plan, schedule controls, and quantitative risk register with assigned mitigation actions.",
     methods: [
@@ -130,14 +114,10 @@ export const engineeringProjects: EngineeringProject[] = [
       "Ontario Building Code",
       "OHSA",
     ],
-    evidence: {
-      caption: "Reserved for verified engineering project-control artifacts.",
-      placeholder:
-        "Gantt screenshots, WBS diagrams, or risk-register excerpts can be added here when supplied.",
-    },
   },
   {
-    number: "04",
+    id: "sensor-planner",
+    navLabel: "Sensor Planner",
     title: "Smart Home Sensor Planner",
     context: "IoT planning & simulation platform",
     role: "Systems modelling / optimization / full-stack delivery",
@@ -149,10 +129,6 @@ export const engineeringProjects: EngineeringProject[] = [
       "Developed a hybrid PSO-GA optimization algorithm in Python to evaluate sensor-placement tradeoffs.",
       "Evaluated near-optimal configurations against coverage, overlap, cost, and energy-related constraints.",
     ],
-    system:
-      "Interactive layout model, configurable sensors, connectivity, event logging, rule-based simulation, and PSO-GA optimization",
-    constraints:
-      "Coverage, overlap, cost, and energy-related placement tradeoffs.",
     outcome:
       "Deployed platform supports scenario modelling and the comparison of near-optimal sensor configurations.",
     methods: [
@@ -248,7 +224,8 @@ export const educationItems = [
     },
   },
   {
-    degree: "Bachelor of Engineering in Electrical Engineering and Management (Honours)",
+    degree:
+      "Bachelor of Engineering in Electrical Engineering and Management (Honours)",
     institution: "Ontario Tech University",
     location: "Oshawa, ON",
     date: "May 2019",
@@ -261,13 +238,14 @@ export const educationItems = [
 
 export const experienceItems = [
   {
+    id: "dobson-partners",
     company: "Dobson Partners",
     legalName: "8906386 Canada Limited",
     location: "Toronto, ON",
     roles: [
       {
         title: "Full-Stack Software Developer",
-        dates: "Nov 2023 – May 2024 · Nov 2024 – Jun 2025",
+        dates: "Nov 2023 - May 2024 | Nov 2024 - Jun 2025",
       },
     ],
     highlights: [
@@ -277,17 +255,18 @@ export const experienceItems = [
     ],
   },
   {
+    id: "ats-group",
     company: "ATS Group Inc.",
     legalName: "",
     location: "Toronto, ON",
     roles: [
       {
         title: "Full-Stack Web Application Developer, Freelance",
-        dates: "Jan 2023 – Aug 2023",
+        dates: "Jan 2023 - Aug 2023",
       },
       {
         title: "Software Consulting Intern",
-        dates: "Apr 2021 – Apr 2022",
+        dates: "Apr 2021 - Apr 2022",
       },
     ],
     highlights: [
@@ -300,13 +279,14 @@ export const experienceItems = [
     ],
   },
   {
+    id: "eme-group",
     company: "EME Group Inc.",
     legalName: "",
     location: "Toronto, ON",
     roles: [
       {
         title: "Web Developer, Freelance",
-        dates: "Nov 2022 – Dec 2022",
+        dates: "Nov 2022 - Dec 2022",
       },
     ],
     highlights: [

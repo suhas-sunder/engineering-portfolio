@@ -1,8 +1,8 @@
-import NavLinks from "./NavLinks";
 import MobileNav from "./MobileNav";
 import NavBtnData from "../../data/NavBtnData";
 import SideNav from "./SideNav";
 import ResumeLink from "./ResumeLink";
+import DesktopNavItem from "./DesktopNavItem";
 
 export default function NavBar() {
   return (
@@ -24,23 +24,15 @@ export default function NavBar() {
               <span className="block text-sm font-bold text-slate-950">
                 Suhas Sunder
               </span>
-              <span className="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-teal-700">
+              <span className="block text-[0.8rem] font-bold uppercase tracking-[0.1em] text-teal-700">
                 Engineer-in-Training (EGBC)
               </span>
             </span>
           </a>
 
           <ul className="ml-auto flex items-center">
-            {NavBtnData.map((data) => (
-              <li key={data.id}>
-                <NavLinks
-                  id={data.id}
-                  url={data.url}
-                  type={data.type}
-                  text={data.text}
-                  isHashLink={data.hashLink}
-                />
-              </li>
+            {NavBtnData.map((item) => (
+              <DesktopNavItem key={item.id} item={item} />
             ))}
           </ul>
 
