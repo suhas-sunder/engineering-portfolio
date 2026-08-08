@@ -277,6 +277,15 @@ describe("engineering portfolio home", () => {
     ).toHaveLength(1);
   });
 
+  it("renders the corrected Dobson Partners employment periods", () => {
+    expect(
+      screen.getByText("Nov 2023 - Mar 2024 | Oct 2024 - Jun 2025"),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText("Nov 2023 - May 2024 | Nov 2024 - Jun 2025"),
+    ).not.toBeInTheDocument();
+  });
+
   it("renders the working contact form and direct contact details", () => {
     expect(screen.getByRole("form", { name: /contact form/i })).toHaveAttribute(
       "action",

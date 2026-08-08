@@ -318,7 +318,7 @@ export const experienceItems = [
     roles: [
       {
         title: "Full-Stack Software Developer",
-        dates: "Nov 2023 - May 2024 | Nov 2024 - Jun 2025",
+        dates: "Nov 2023 - Mar 2024 | Oct 2024 - Jun 2025",
       },
     ],
     highlights: [
