@@ -1,5 +1,18 @@
 import CapstoneImage from "../assets/capstone-proj-screenshot.jpg";
-import SensorPlannerImage from "../assets/sensor_planner.jpg";
+import HevBevMatlabImage from "../assets/hev_bev_matlab.png";
+import HevBevResultsImage from "../assets/hev_bev_results_plots.png";
+import ConstructionScheduleImage from "../assets/project_management_plan_phase_1.png";
+import ConstructionRiskPlanImage from "../assets/project_management_risk_mgmt_plan.png";
+import SensorPlannerImage from "../assets/sensor_planner.png";
+import SensorPlannerOptimizationImage from "../assets/sensor_planner_pso_ga_layouts.png";
+
+export interface ProjectEvidenceImage {
+  image: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+}
 
 export interface EngineeringProject {
   id: string;
@@ -12,9 +25,8 @@ export interface EngineeringProject {
   outcome: string;
   methods: string[];
   evidence?: {
-    image?: string;
-    alt?: string;
-    caption: string;
+    images: ProjectEvidenceImage[];
+    layout: "single" | "stacked" | "wide-pair";
   };
   links?: {
     label: string;
@@ -49,10 +61,17 @@ export const engineeringProjects: EngineeringProject[] = [
       "Testing",
     ],
     evidence: {
-      image: CapstoneImage,
-      alt: "Arc fault detection capstone prototype with Arduino, sensing hardware, outlet module, and mobile notifications",
-      caption:
-        "Capstone prototype hardware and remote notification interfaces.",
+      layout: "single",
+      images: [
+        {
+          image: CapstoneImage,
+          alt: "Arc fault detection prototype with Arduino, breadboard, outlet module, and mobile warning interfaces",
+          caption:
+            "Capstone prototype hardware and remote notification interfaces.",
+          width: 1280,
+          height: 720,
+        },
+      ],
     },
     links: [
       {
@@ -87,6 +106,26 @@ export const engineeringProjects: EngineeringProject[] = [
       "Regenerative braking",
       "Drive-cycle analysis",
     ],
+    evidence: {
+      layout: "stacked",
+      images: [
+        {
+          image: HevBevMatlabImage,
+          alt: "MATLAB and Simulink brake-split controller and closed-loop HEV and BEV model block diagrams",
+          caption: "Brake-split controller and closed-loop vehicle model.",
+          width: 3315,
+          height: 1119,
+        },
+        {
+          image: HevBevResultsImage,
+          alt: "WLTP simulation plots comparing actual and desired speed, regenerative and friction braking forces, and battery state of charge",
+          caption:
+            "WLTP drive-cycle response, braking-force allocation, and state-of-charge results.",
+          width: 3304,
+          height: 1852,
+        },
+      ],
+    },
   },
   {
     id: "construction-planning",
@@ -114,6 +153,26 @@ export const engineeringProjects: EngineeringProject[] = [
       "Ontario Building Code",
       "OHSA",
     ],
+    evidence: {
+      layout: "stacked",
+      images: [
+        {
+          image: ConstructionScheduleImage,
+          alt: "Phase 1 construction project schedule beside the reviewed deck design drawing",
+          caption: "Phase 1 project schedule and reviewed design drawing.",
+          width: 3088,
+          height: 1251,
+        },
+        {
+          image: ConstructionRiskPlanImage,
+          alt: "Construction risk management plan with RPN categories, assumptions log, and RPN ranking table",
+          caption:
+            "Risk-management categories, assumptions log, and RPN reference table.",
+          width: 3073,
+          height: 1618,
+        },
+      ],
+    },
   },
   {
     id: "sensor-planner",
@@ -140,9 +199,23 @@ export const engineeringProjects: EngineeringProject[] = [
       "Systems modelling",
     ],
     evidence: {
-      image: SensorPlannerImage,
-      alt: "Smart Home Sensor Planner interface for configuring a multi-floor sensor layout",
-      caption: "Deployed Sensor Planner layout-modelling interface.",
+      layout: "wide-pair",
+      images: [
+        {
+          image: SensorPlannerImage,
+          alt: "Smart Home Sensor Planner interface showing a multi-floor layout, configured sensors, and coverage areas",
+          caption: "Deployed Sensor Planner layout-modelling interface.",
+          width: 3811,
+          height: 1951,
+        },
+        {
+          image: SensorPlannerOptimizationImage,
+          alt: "PSO-GA sensor placement results across multiple floor-plan layouts with coverage circles and overlap",
+          caption: "PSO-GA placement results across varied floor-plan layouts.",
+          width: 2802,
+          height: 1576,
+        },
+      ],
     },
     links: [
       {

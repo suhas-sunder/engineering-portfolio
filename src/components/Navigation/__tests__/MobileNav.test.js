@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import MobileNav from "../MobileNav";
+import { siteConfig } from "../../../config/site";
 
 const renderMobileNav = () => render(<MobileNav />);
 
@@ -11,6 +12,7 @@ const expectedUrls = [
   "/#education",
   "/#experience",
   "/#contact",
+  siteConfig.resumeUrl,
 ];
 
 describe("mobile navigation", () => {
@@ -32,9 +34,11 @@ describe("mobile navigation", () => {
     links.forEach((link, index) =>
       expect(link).toHaveAttribute("href", expectedUrls[index]),
     );
-    const resumeButton = screen.getByTestId("resume-unconfigured");
-    expect(resumeButton).toBeDisabled();
-    expect(resumeButton).toHaveTextContent(/^Resume$/);
+    const resumeLink = screen.getByTestId("resume-link");
+    expect(resumeLink).toHaveTextContent(/^Resume$/);
+    expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
+    expect(resumeLink).toHaveAttribute("target", "_blank");
+    expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(screen.queryByText(/pdf|pending|download/i)).not.toBeInTheDocument();
   });
 

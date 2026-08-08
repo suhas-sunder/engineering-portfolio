@@ -7,27 +7,46 @@ import {
 import SectionHeading from "../UI/SectionHeading";
 
 function ProjectEvidence({ project }: { project: EngineeringProject }) {
-  if (!project.evidence?.image) return null;
+  if (!project.evidence?.images.length) return null;
+
+  const galleryClass = {
+    single: "max-w-5xl",
+    stacked: "max-w-[76rem]",
+    "wide-pair": "max-w-[76rem] 2xl:max-w-none 2xl:grid-cols-2",
+  }[project.evidence.layout];
 
   return (
-    <figure className="min-w-0 lg:sticky lg:top-28">
-      <div className="overflow-hidden border border-slate-300 bg-slate-100">
-        <img
-          src={project.evidence.image}
-          alt={project.evidence.alt || ""}
-          className="aspect-[16/10] h-auto w-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      <figcaption className="border-x border-b border-slate-300 bg-white px-4 py-3 text-sm leading-6 text-slate-700">
-        {project.evidence.caption}
-      </figcaption>
-    </figure>
+    <div
+      className={`mt-10 grid min-w-0 grid-cols-1 gap-8 ${galleryClass}`}
+      role="group"
+      aria-label={`${project.title} technical evidence`}
+      data-testid={`${project.id}-evidence`}
+      data-evidence-layout={project.evidence.layout}
+    >
+      {project.evidence.images.map((evidence) => (
+        <figure key={evidence.image} className="min-w-0">
+          <div className="border border-slate-300 bg-white p-2 sm:p-3">
+            <img
+              src={evidence.image}
+              alt={evidence.alt}
+              className="h-auto w-full object-contain"
+              loading="lazy"
+              decoding="async"
+              width={evidence.width}
+              height={evidence.height}
+            />
+          </div>
+          <figcaption className="border-x border-b border-slate-300 bg-white px-4 py-3 text-sm leading-6 text-slate-700">
+            {evidence.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
   );
 }
 
 function ProjectArticle({ project }: { project: EngineeringProject }) {
-  const hasVisualEvidence = Boolean(project.evidence?.image);
+  const hasVisualEvidence = Boolean(project.evidence?.images.length);
 
   return (
     <article
@@ -35,14 +54,8 @@ function ProjectArticle({ project }: { project: EngineeringProject }) {
       className="anchor-target border-t border-slate-300 py-12 sm:py-16 lg:py-20"
       aria-labelledby={`${project.id}-heading`}
     >
-      <div
-        className={
-          hasVisualEvidence
-            ? "grid items-start gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)] lg:gap-14 xl:gap-20"
-            : "max-w-5xl"
-        }
-      >
-        <div className="min-w-0">
+      <div className="min-w-0">
+        <div className="max-w-5xl">
           <h3
             id={`${project.id}-heading`}
             className="text-3xl font-semibold leading-tight tracking-[-0.035em] text-slate-950 sm:text-4xl"
@@ -78,8 +91,12 @@ function ProjectArticle({ project }: { project: EngineeringProject }) {
               ))}
             </ul>
           </div>
+        </div>
 
-          <dl className="mt-8 grid gap-6 border-y border-slate-300 py-6 sm:grid-cols-2 sm:gap-8">
+        {hasVisualEvidence ? <ProjectEvidence project={project} /> : null}
+
+        <div className="max-w-5xl">
+          <dl className="mt-10 grid gap-6 border-y border-slate-300 py-6 sm:grid-cols-2 sm:gap-8">
             <div>
               <dt className="text-sm font-bold uppercase tracking-[0.14em] text-slate-700">
                 Tools & methods
@@ -124,8 +141,6 @@ function ProjectArticle({ project }: { project: EngineeringProject }) {
             </div>
           ) : null}
         </div>
-
-        {hasVisualEvidence ? <ProjectEvidence project={project} /> : null}
       </div>
     </article>
   );

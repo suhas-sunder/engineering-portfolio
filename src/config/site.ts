@@ -14,7 +14,6 @@ export const siteConfig = {
     "Open to relocation across Canada & the U.S. | Open to travel | On-site & hybrid",
   driverLicence: "Valid Canadian driver's licence",
 
-  // TODO: Paste the verified Google Drive resume page URL here.
-  // Do not replace this with a local PDF path.
-  resumeUrl: null as string | null,
+  resumeUrl:
+    "https://drive.google.com/file/d/101xfA7D03hnIUp9I5E8pJR_HuW9D_rjf/view?usp=drive_link",
 };

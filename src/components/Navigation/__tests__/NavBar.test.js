@@ -86,31 +86,26 @@ describe("primary navigation", () => {
 
   it("shows one navbar resume control with concise wording", () => {
     renderNavBar();
-    const resumeButton = screen.getByRole("button", {
-      name: /resume link requires configuration/i,
+    const resumeLink = screen.getByRole("link", {
+      name: /open resume in a new tab/i,
     });
 
-    expect(resumeButton).toBeDisabled();
-    expect(resumeButton).toHaveTextContent(/^Resume$/);
+    expect(resumeLink).toHaveTextContent(/^Resume$/);
+    expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
+    expect(resumeLink).toHaveAttribute("target", "_blank");
+    expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(screen.queryByText(/pdf|pending|download/i)).not.toBeInTheDocument();
   });
 
   it("opens the configured resume page in a secure new tab", () => {
-    const previousResumeUrl = siteConfig.resumeUrl;
-    siteConfig.resumeUrl = "https://drive.google.com/example-resume-page";
+    renderNavBar();
+    const resumeLink = screen.getByRole("link", {
+      name: /open resume in a new tab/i,
+    });
 
-    try {
-      renderNavBar();
-      const resumeLink = screen.getByRole("link", {
-        name: /open resume in a new tab/i,
-      });
-
-      expect(resumeLink).toHaveTextContent(/^Resume$/);
-      expect(resumeLink).toHaveAttribute("target", "_blank");
-      expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
-      expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
-    } finally {
-      siteConfig.resumeUrl = previousResumeUrl;
-    }
+    expect(resumeLink).toHaveTextContent(/^Resume$/);
+    expect(resumeLink).toHaveAttribute("target", "_blank");
+    expect(resumeLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(resumeLink).toHaveAttribute("href", siteConfig.resumeUrl);
   });
 });

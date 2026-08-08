@@ -106,16 +106,99 @@ describe("engineering portfolio home", () => {
   });
 
   it("renders verified project images without fabricated evidence placeholders", () => {
+    const altTextPatterns = [
+      /arc fault detection prototype with arduino/i,
+      /matlab and simulink brake-split controller/i,
+      /wltp simulation plots comparing actual and desired speed/i,
+      /phase 1 construction project schedule/i,
+      /construction risk management plan with rpn categories/i,
+      /smart home sensor planner interface showing a multi-floor layout/i,
+      /pso-ga sensor placement results/i,
+    ];
+
+    altTextPatterns.forEach((pattern) => {
+      const image = screen.getByAltText(pattern);
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute("loading", "lazy");
+      expect(image).toHaveAttribute("decoding", "async");
+      expect(image.className).toContain("object-contain");
+      expect(image.className).not.toContain("object-cover");
+      expect(Number(image.getAttribute("width"))).toBeGreaterThan(0);
+      expect(Number(image.getAttribute("height"))).toBeGreaterThan(0);
+    });
+
+    const projects = document.getElementById("projects");
+    expect(projects).not.toBeNull();
+    if (!projects) throw new Error("Expected projects section");
     expect(
-      screen.getByAltText(/arc fault detection capstone prototype/i),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByAltText(/smart home sensor planner interface/i),
-    ).toBeInTheDocument();
+      within(projects).queryByAltText(/professional headshot/i),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(/evidence placeholder/i)).not.toBeInTheDocument();
     expect(
       screen.queryByText(/no illustrative or fabricated/i),
     ).not.toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(
+      /capstone-proj-screenshot|hev_bev|project_management_|sensor_planner_pso/i,
+    );
+  });
+
+  it("keeps multi-image project evidence in deterministic order", () => {
+    const bevEvidence = screen.getByRole("group", {
+      name: /hybrid electric vehicle.*technical evidence/i,
+    });
+    expect(
+      within(bevEvidence)
+        .getAllByRole("img")
+        .map((image) => image.getAttribute("alt")),
+    ).toEqual([
+      expect.stringMatching(/brake-split controller/i),
+      expect.stringMatching(/wltp simulation plots/i),
+    ]);
+
+    const constructionEvidence = screen.getByRole("group", {
+      name: /engineering construction planning technical evidence/i,
+    });
+    expect(
+      within(constructionEvidence)
+        .getAllByRole("img")
+        .map((image) => image.getAttribute("alt")),
+    ).toEqual([
+      expect.stringMatching(/phase 1 construction project schedule/i),
+      expect.stringMatching(/risk management plan/i),
+    ]);
+
+    const sensorEvidence = screen.getByRole("group", {
+      name: /smart home sensor planner technical evidence/i,
+    });
+    expect(
+      within(sensorEvidence)
+        .getAllByRole("img")
+        .map((image) => image.getAttribute("alt")),
+    ).toEqual([
+      expect.stringMatching(/sensor planner interface/i),
+      expect.stringMatching(/pso-ga sensor placement results/i),
+    ]);
+  });
+
+  it("supports one-image and responsive two-image evidence layouts", () => {
+    expect(screen.getByTestId("arc-fault-evidence")).toHaveAttribute(
+      "data-evidence-layout",
+      "single",
+    );
+    expect(
+      within(screen.getByTestId("arc-fault-evidence")).getAllByRole("img"),
+    ).toHaveLength(1);
+
+    expect(screen.getByTestId("bev-simulation-evidence")).toHaveAttribute(
+      "data-evidence-layout",
+      "stacked",
+    );
+    expect(
+      within(screen.getByTestId("bev-simulation-evidence")).getAllByRole("img"),
+    ).toHaveLength(2);
+    expect(screen.getByTestId("sensor-planner-evidence").className).toContain(
+      "2xl:grid-cols-2",
+    );
   });
 
   it("provides stable anchors for projects and employers", () => {
