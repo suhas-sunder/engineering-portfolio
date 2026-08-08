@@ -107,7 +107,7 @@ export const engineeringProjects: EngineeringProject[] = [
       "Drive-cycle analysis",
     ],
     evidence: {
-      layout: "stacked",
+      layout: "wide-pair",
       images: [
         {
           image: HevBevMatlabImage,
@@ -154,7 +154,7 @@ export const engineeringProjects: EngineeringProject[] = [
       "OHSA",
     ],
     evidence: {
-      layout: "stacked",
+      layout: "wide-pair",
       images: [
         {
           image: ConstructionScheduleImage,

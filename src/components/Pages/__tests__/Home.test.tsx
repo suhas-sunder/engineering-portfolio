@@ -195,19 +195,26 @@ describe("engineering portfolio home", () => {
 
     expect(screen.getByTestId("bev-simulation-evidence")).toHaveAttribute(
       "data-evidence-layout",
-      "stacked",
+      "wide-pair",
     );
     expect(
       within(screen.getByTestId("bev-simulation-evidence")).getAllByRole("img"),
     ).toHaveLength(2);
-    expect(screen.getByTestId("sensor-planner-evidence").className).toContain(
-      "2xl:grid-cols-2",
+    [
+      "bev-simulation-evidence",
+      "construction-planning-evidence",
+      "sensor-planner-evidence",
+    ].forEach((testId) => {
+      expect(screen.getByTestId(testId).className).toContain("grid-cols-1");
+      expect(screen.getByTestId(testId).className).toContain(
+        "2xl:grid-cols-2",
+      );
+    });
+    expect(screen.getByTestId("arc-fault-evidence").className).toContain(
+      "mx-auto",
     );
     expect(screen.getByTestId("arc-fault-evidence").className).toContain(
-      "max-w-[82rem]",
-    );
-    expect(screen.getByTestId("bev-simulation-evidence").className).toContain(
-      "max-w-[96rem]",
+      "max-w-5xl",
     );
     expect(screen.getByTestId("projects-container").className).toContain(
       "max-w-[100rem]",

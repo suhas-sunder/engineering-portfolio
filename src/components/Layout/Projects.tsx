@@ -10,7 +10,7 @@ function ProjectEvidence({ project }: { project: EngineeringProject }) {
   if (!project.evidence?.images.length) return null;
 
   const galleryClass = {
-    single: "max-w-[82rem]",
+    single: "mx-auto max-w-5xl",
     stacked: "max-w-[96rem]",
     "wide-pair": "max-w-[96rem] 2xl:max-w-none 2xl:grid-cols-2",
   }[project.evidence.layout];
