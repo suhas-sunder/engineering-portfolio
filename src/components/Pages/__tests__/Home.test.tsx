@@ -52,6 +52,10 @@ describe("engineering portfolio home", () => {
     expect(
       screen.getByAltText(/professional headshot of suhas sunder/i),
     ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/engineering portfolio/i),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/eit · egbc/i)).not.toBeInTheDocument();
   });
 
   it("renders four compact hero shortcuts without a duplicate resume control", () => {
@@ -177,6 +181,9 @@ describe("engineering portfolio home", () => {
         .getAllByRole("link", { name: /suhas@live.ca/i })
         .every((link) => link.getAttribute("href") === "mailto:suhas@live.ca"),
     ).toBe(true);
+    expect(
+      screen.queryByRole("link", { name: /suhassunder\.ca/i }),
+    ).not.toBeInTheDocument();
   });
 
   it("does not expose PDF or pending resume wording in the hero", () => {

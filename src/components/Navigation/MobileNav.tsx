@@ -48,7 +48,7 @@ export default function MobileNav() {
         <a
           href="/"
           onClick={closeBurgerMenu}
-          aria-label="Suhas Sunder engineering portfolio home"
+          aria-label="Suhas Sunder home"
           className="flex min-h-11 min-w-0 items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
         >
           <span className="flex h-10 w-10 items-center justify-center bg-slate-900 text-sm font-bold tracking-wider text-white">

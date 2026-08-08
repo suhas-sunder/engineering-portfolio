@@ -7,7 +7,7 @@ function Footer() {
     <footer className="border-t border-slate-300 bg-[#f7f6f2] px-5 py-8 sm:px-8 lg:px-10">
       <div className="mx-auto flex w-full max-w-[82rem] flex-col gap-5 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          &copy; {currentYear} {siteConfig.name}. Engineering portfolio.
+          &copy; {currentYear} {siteConfig.name}.
         </p>
 
         <nav aria-label="Footer navigation">

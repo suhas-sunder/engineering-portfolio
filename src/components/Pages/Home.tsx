@@ -28,7 +28,7 @@ function Home() {
         />
 
         <div className="mx-auto grid w-full max-w-[82rem] items-center gap-10 lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)] lg:gap-16 xl:gap-20">
-          <figure className="order-2 mx-auto w-full max-w-[27rem] lg:order-1 lg:mx-0">
+          <div className="order-2 mx-auto w-full max-w-[27rem] lg:order-1 lg:mx-0">
             <div className="relative overflow-hidden border border-slate-300 bg-[#e7ecec]">
               <div
                 className="absolute inset-x-0 top-0 h-2 bg-teal-700"
@@ -42,13 +42,7 @@ function Home() {
                 height={540}
               />
             </div>
-            <figcaption className="flex items-start justify-between gap-4 border-x border-b border-slate-300 bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-              <span>Engineering portfolio</span>
-              <span className="whitespace-nowrap text-teal-700">
-                EIT · EGBC
-              </span>
-            </figcaption>
-          </figure>
+          </div>
 
           <div className="order-1 min-w-0 lg:order-2">
             <h1 className="text-[clamp(2.7rem,7.5vw,5.8rem)] font-semibold leading-[0.92] tracking-[-0.055em] text-slate-950">

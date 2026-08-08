@@ -212,13 +212,6 @@ function Contact() {
                 </a>
               ))}
             </address>
-
-            <a
-              href={siteConfig.url}
-              className="mt-6 inline-flex min-h-11 items-center text-base font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 hover:text-teal-800 hover:decoration-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
-            >
-              suhassunder.ca
-            </a>
           </div>
 
           <div className="border border-slate-300 bg-[#f7f6f2] p-5 sm:p-8 lg:p-10">

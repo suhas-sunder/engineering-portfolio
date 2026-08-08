@@ -6,9 +6,10 @@ describe("engineering portfolio footer", () => {
   beforeEach(() => render(<Footer />));
 
   it("renders portfolio ownership text", () => {
+    expect(screen.getByText(/suhas sunder\.$/i)).toBeInTheDocument();
     expect(
-      screen.getByText(/suhas sunder\. engineering portfolio/i),
-    ).toBeInTheDocument();
+      screen.queryByText(/engineering portfolio/i),
+    ).not.toBeInTheDocument();
   });
 
   it("renders direct email, LinkedIn, and repository links", () => {

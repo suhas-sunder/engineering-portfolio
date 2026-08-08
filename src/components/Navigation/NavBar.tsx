@@ -14,7 +14,7 @@ export default function NavBar() {
         <div className="mx-auto hidden min-h-[4.5rem] w-full max-w-[88rem] items-center gap-6 px-6 xl:flex xl:px-10">
           <a
             href="/"
-            aria-label="Suhas Sunder engineering portfolio home"
+            aria-label="Suhas Sunder home"
             className="flex min-w-fit items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
           >
             <span className="flex h-10 w-10 items-center justify-center bg-slate-900 text-sm font-bold tracking-wider text-white">
