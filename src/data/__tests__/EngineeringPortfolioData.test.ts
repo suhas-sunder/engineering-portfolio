@@ -13,6 +13,18 @@ const evidenceAssets = [
     height: 720,
   },
   {
+    projectId: "power-system-algorithms",
+    file: "frequency-response.png",
+    width: 738,
+    height: 610,
+  },
+  {
+    projectId: "power-system-algorithms",
+    file: "phasor-estimation.png",
+    width: 753,
+    height: 606,
+  },
+  {
     projectId: "bev-simulation",
     file: "hev_bev_matlab.png",
     width: 3315,
@@ -115,6 +127,16 @@ describe("engineering project evidence assets", () => {
         .flatMap((project) => project.evidence?.images || [])
         .some((image) => image.image.includes("profile-pic")),
     ).toBe(false);
+  });
+
+  it("keeps the requested five-project order", () => {
+    expect(engineeringProjects.map(({ id }) => id)).toEqual([
+      "arc-fault",
+      "power-system-algorithms",
+      "bev-simulation",
+      "construction-planning",
+      "sensor-planner",
+    ]);
   });
 });
 

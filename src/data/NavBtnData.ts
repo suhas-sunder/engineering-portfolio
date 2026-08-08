@@ -32,6 +32,11 @@ const NavBtnData: NavItem[] = [
     hashLink: true,
     children: [
       { id: "nav-arc-fault", url: "/#arc-fault", text: "Arc Fault Detection" },
+      {
+        id: "nav-power-system-algorithms",
+        url: "/#power-system-algorithms",
+        text: "Power System Algorithms",
+      },
       { id: "nav-bev", url: "/#bev-simulation", text: "BEV Simulation" },
       {
         id: "nav-construction",

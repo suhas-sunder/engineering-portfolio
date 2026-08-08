@@ -95,14 +95,27 @@ describe("engineering portfolio home", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("renders all four engineering projects", () => {
-    [
-      /arc fault detection system/i,
-      /hybrid electric vehicle \/ battery electric vehicle simulation/i,
-      /engineering construction planning/i,
-      /smart home sensor planner/i,
-    ].forEach((name) => {
-      expect(screen.getByRole("heading", { name })).toBeInTheDocument();
+  it("renders all five engineering projects in the requested order", () => {
+    const headings = [
+      screen.getByRole("heading", { name: /arc fault detection system/i }),
+      screen.getByRole("heading", {
+        name: /power system protection & signal estimation algorithms/i,
+      }),
+      screen.getByRole("heading", {
+        name: /hybrid electric vehicle \/ battery electric vehicle simulation/i,
+      }),
+      screen.getByRole("heading", {
+        name: /engineering construction planning/i,
+      }),
+      screen.getByRole("heading", { name: /smart home sensor planner/i }),
+    ];
+
+    headings.forEach((heading) => expect(heading).toBeInTheDocument());
+    headings.slice(0, -1).forEach((heading, index) => {
+      expect(
+        heading.compareDocumentPosition(headings[index + 1]) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
     });
   });
 
@@ -116,12 +129,23 @@ describe("engineering portfolio home", () => {
     expect(
       screen.getByRole("link", { name: /visit sensor planner/i }),
     ).toHaveAttribute("href", "https://sensor-planner.netlify.app/");
+    const matlabLink = screen.getByRole("link", {
+      name: /view matlab implementations on github/i,
+    });
+    expect(matlabLink).toHaveAttribute(
+      "href",
+      "https://github.com/suhas-sunder/smart-grid-matlab-algorithms-project",
+    );
+    expect(matlabLink).toHaveAttribute("target", "_blank");
+    expect(matlabLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(document.body.innerHTML).not.toContain("www.sensorplanner.com");
   });
 
   it("renders verified project images without fabricated evidence placeholders", () => {
     const altTextPatterns = [
       /arc fault detection prototype with arduino/i,
+      /matlab magnitude and phase frequency-response plots/i,
+      /matlab phasor magnitude and phase-angle estimates/i,
       /matlab and simulink brake-split controller/i,
       /wltp simulation plots comparing actual and desired speed/i,
       /phase 1 construction project schedule/i,
@@ -154,9 +178,27 @@ describe("engineering portfolio home", () => {
     expect(document.body.textContent).not.toMatch(
       /capstone-proj-screenshot|hev_bev|project_management_|sensor_planner_pso/i,
     );
+    expect(
+      screen.queryByText(/^frequency-response\.png$/i),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/^phasor-estimation\.png$/i),
+    ).not.toBeInTheDocument();
   });
 
   it("keeps multi-image project evidence in deterministic order", () => {
+    const powerSystemEvidence = screen.getByRole("group", {
+      name: /power system protection.*technical evidence/i,
+    });
+    expect(
+      within(powerSystemEvidence)
+        .getAllByRole("img")
+        .map((image) => image.getAttribute("alt")),
+    ).toEqual([
+      expect.stringMatching(/frequency-response plots/i),
+      expect.stringMatching(/phasor magnitude and phase-angle estimates/i),
+    ]);
+
     const bevEvidence = screen.getByRole("group", {
       name: /hybrid electric vehicle.*technical evidence/i,
     });
@@ -220,6 +262,15 @@ describe("engineering portfolio home", () => {
         "2xl:grid-cols-2",
       );
     });
+    expect(
+      screen.getByTestId("power-system-algorithms-evidence").className,
+    ).toContain("grid-cols-1");
+    expect(
+      screen.getByTestId("power-system-algorithms-evidence").className,
+    ).toContain("max-w-3xl");
+    expect(
+      screen.getByTestId("power-system-algorithms-evidence").className,
+    ).toContain("xl:grid-cols-2");
     expect(screen.getByTestId("arc-fault-evidence").className).toContain(
       "mx-auto",
     );
@@ -237,6 +288,7 @@ describe("engineering portfolio home", () => {
   it("provides stable anchors for projects and employers", () => {
     [
       "arc-fault",
+      "power-system-algorithms",
       "bev-simulation",
       "construction-planning",
       "sensor-planner",

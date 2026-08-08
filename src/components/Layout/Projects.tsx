@@ -12,6 +12,8 @@ function ProjectEvidence({ project }: { project: EngineeringProject }) {
   const galleryClass = {
     single: "mx-auto max-w-5xl",
     stacked: "max-w-[96rem]",
+    "desktop-pair":
+      "mx-auto max-w-3xl xl:mx-0 xl:max-w-none xl:grid-cols-2",
     "wide-pair": "max-w-[96rem] 2xl:max-w-none 2xl:grid-cols-2",
   }[project.evidence.layout];
 

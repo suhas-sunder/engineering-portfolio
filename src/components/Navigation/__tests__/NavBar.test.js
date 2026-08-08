@@ -57,6 +57,11 @@ describe("primary navigation", () => {
     expect(
       within(projectsMenu).getByRole("link", { name: /arc fault detection/i }),
     ).toHaveAttribute("href", "/#arc-fault");
+    expect(
+      within(projectsMenu).getByRole("link", {
+        name: /power system algorithms/i,
+      }),
+    ).toHaveAttribute("href", "/#power-system-algorithms");
 
     const experienceTrigger = screen.getByTestId(
       "desktop-disclosure-nav-experience",

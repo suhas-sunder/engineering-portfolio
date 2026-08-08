@@ -1,4 +1,6 @@
 import CapstoneImage from "../assets/capstone-proj-screenshot.jpg";
+import FrequencyResponseImage from "../assets/frequency-response.png";
+import PhasorEstimationImage from "../assets/phasor-estimation.png";
 import HevBevMatlabImage from "../assets/hev_bev_matlab.png";
 import HevBevResultsImage from "../assets/hev_bev_results_plots.png";
 import ConstructionScheduleImage from "../assets/project_management_plan_phase_1.png";
@@ -26,7 +28,7 @@ export interface EngineeringProject {
   methods: string[];
   evidence?: {
     images: ProjectEvidenceImage[];
-    layout: "single" | "stacked" | "wide-pair";
+    layout: "single" | "stacked" | "desktop-pair" | "wide-pair";
   };
   links?: {
     label: string;
@@ -77,6 +79,57 @@ export const engineeringProjects: EngineeringProject[] = [
       {
         label: "View capstone demo video",
         url: "https://drive.google.com/file/d/1kzKO8vva8IF2pJV-VUExGpKP8mYJUerR/view?usp=sharing",
+      },
+    ],
+  },
+  {
+    id: "power-system-algorithms",
+    navLabel: "Power System Algorithms",
+    title: "Power System Protection & Signal Estimation Algorithms",
+    context: "MEng Smart Grid Coursework",
+    role: "MATLAB algorithm implementation and evaluation",
+    objective:
+      "Implemented and evaluated MATLAB algorithms for power-system signal measurement and numerical-relay applications, including phasor magnitude and phase estimation, frequency estimation, and short-window signal-processing methods.",
+    highlights: [
+      "Implemented trigonometric, DFT-based, half-cycle, cosine, least-error-square, and frequency-estimation algorithms in MATLAB.",
+      "Analyzed sampled electrical waveforms using magnitude, phase, frequency-response, and complex-phasor representations.",
+      "Applied concepts including phasors, sampling, harmonics, CT/PT measurement, anti-aliasing, frequency estimation, and protection speed/selectivity to power-system monitoring and fault-analysis exercises.",
+    ],
+    outcome:
+      "MATLAB implementations and analysis outputs for sampled power-system signals and numerical-relay coursework.",
+    methods: [
+      "MATLAB",
+      "Phasor estimation",
+      "DFT",
+      "Frequency estimation",
+      "Sampled signal analysis",
+      "Numerical-relay concepts",
+    ],
+    evidence: {
+      layout: "desktop-pair",
+      images: [
+        {
+          image: FrequencyResponseImage,
+          alt: "MATLAB magnitude and phase frequency-response plots for a power-system signal estimation algorithm",
+          caption:
+            "Algorithm frequency response showing magnitude and phase characteristics across the sampled frequency range.",
+          width: 738,
+          height: 610,
+        },
+        {
+          image: PhasorEstimationImage,
+          alt: "MATLAB phasor magnitude and phase-angle estimates plotted over time",
+          caption:
+            "MATLAB phasor-estimation output showing magnitude response and phase-angle tracking for a sampled electrical waveform.",
+          width: 753,
+          height: 606,
+        },
+      ],
+    },
+    links: [
+      {
+        label: "View MATLAB Implementations on GitHub",
+        url: "https://github.com/suhas-sunder/smart-grid-matlab-algorithms-project",
       },
     ],
   },

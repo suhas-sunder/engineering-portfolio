@@ -89,6 +89,9 @@ describe("mobile navigation", () => {
     expect(
       screen.getByRole("link", { name: /arc fault detection/i }),
     ).toHaveAttribute("href", "/#arc-fault");
+    expect(
+      screen.getByRole("link", { name: /power system algorithms/i }),
+    ).toHaveAttribute("href", "/#power-system-algorithms");
 
     fireEvent.click(experience);
     expect(experience).toHaveAttribute("aria-expanded", "true");
