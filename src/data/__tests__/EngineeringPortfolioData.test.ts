@@ -1,6 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
-import { engineeringProjects } from "../EngineeringPortfolioData";
+import {
+  educationItems,
+  engineeringProjects,
+} from "../EngineeringPortfolioData";
 
 const evidenceAssets = [
   {
@@ -112,5 +115,24 @@ describe("engineering project evidence assets", () => {
         .flatMap((project) => project.evidence?.images || [])
         .some((image) => image.image.includes("profile-pic")),
     ).toBe(false);
+  });
+});
+
+describe("engineering education data", () => {
+  it("uses the verified BEng coursework supplied in the current resume", () => {
+    const beng = educationItems.find(({ degree }) =>
+      degree.startsWith("Bachelor of Engineering"),
+    );
+
+    expect(beng?.coursework).toEqual([
+      "Power Systems",
+      "Electric Machines",
+      "Fundamentals of Smart Grid",
+      "Introduction to Power Electronics",
+      "Introduction to Control Systems",
+      "Advanced Control Systems",
+      "Design Principles & Project Management",
+      "Engineering Operations & Project Management",
+    ]);
   });
 });

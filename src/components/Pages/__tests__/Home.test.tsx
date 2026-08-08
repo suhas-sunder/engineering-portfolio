@@ -261,7 +261,7 @@ describe("engineering portfolio home", () => {
     expect(document.body.textContent).not.toContain("—");
   });
 
-  it("renders engineering education without duplicated BEng coursework", () => {
+  it("renders verified engineering coursework without duplication", () => {
     expect(
       screen.getByRole("heading", {
         name: /master of engineering in electrical and computer engineering/i,
@@ -275,6 +275,10 @@ describe("engineering portfolio home", () => {
     expect(
       screen.getAllByText(/advanced engineering mathematics/i),
     ).toHaveLength(1);
+    expect(screen.getByText(/^power systems$/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/^engineering operations & project management$/i),
+    ).toBeInTheDocument();
   });
 
   it("renders the corrected Dobson Partners employment periods", () => {

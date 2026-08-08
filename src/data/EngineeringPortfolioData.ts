@@ -303,9 +303,16 @@ export const educationItems = [
     location: "Oshawa, ON",
     date: "May 2019",
     distinction: "",
-    // TODO: Add verified undergraduate course titles when supplied. The
-    // duplicated resume coursework was intentionally not copied.
-    coursework: [],
+    coursework: [
+      "Power Systems",
+      "Electric Machines",
+      "Fundamentals of Smart Grid",
+      "Introduction to Power Electronics",
+      "Introduction to Control Systems",
+      "Advanced Control Systems",
+      "Design Principles & Project Management",
+      "Engineering Operations & Project Management",
+    ],
   },
 ];
 
