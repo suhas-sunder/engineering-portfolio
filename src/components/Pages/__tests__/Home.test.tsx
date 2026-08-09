@@ -258,9 +258,7 @@ describe("engineering portfolio home", () => {
       "sensor-planner-evidence",
     ].forEach((testId) => {
       expect(screen.getByTestId(testId).className).toContain("grid-cols-1");
-      expect(screen.getByTestId(testId).className).toContain(
-        "2xl:grid-cols-2",
-      );
+      expect(screen.getByTestId(testId).className).toContain("2xl:grid-cols-2");
     });
     expect(
       screen.getByTestId("power-system-algorithms-evidence").className,
@@ -337,9 +335,34 @@ describe("engineering portfolio home", () => {
     expect(
       screen.getAllByText(/advanced engineering mathematics/i),
     ).toHaveLength(1);
+    expect(
+      screen.getByText(/^programming methods & abstraction$/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/^foundations of software engineering$/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/^power systems$/i)).toBeInTheDocument();
     expect(
       screen.getByText(/^engineering operations & project management$/i),
+    ).toBeInTheDocument();
+  });
+
+  it("renders the leadership experience supplied in the latest resume", () => {
+    expect(
+      screen.getByRole("heading", {
+        name: /engineering planning project team lead/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /capstone project team lead/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/led a 7-member team using the waterfall methodology/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /led a 3-person team developing an embedded fault-detection system/i,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -350,6 +373,25 @@ describe("engineering portfolio home", () => {
     expect(
       screen.queryByText("Nov 2023 - May 2024 | Nov 2024 - Jun 2025"),
     ).not.toBeInTheDocument();
+  });
+
+  it("renders the current resume employment details", () => {
+    expect(
+      screen.getByText(
+        /designed prisma orm data models and postgresql schemas/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/deploying through aws cloudfront and amazon s3/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /implementing automated tests with jest and react testing library/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/continue to provide occasional domain configuration/i),
+    ).toBeInTheDocument();
   });
 
   it("describes professional experience as more than three years", () => {

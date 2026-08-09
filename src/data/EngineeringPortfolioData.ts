@@ -314,15 +314,12 @@ export const skillGroups = [
   {
     title: "PROGRAMMING & DATA",
     items: [
-      "Python",
-      "SQL",
-      "JavaScript",
-      "TypeScript",
-      "PostgreSQL",
-      "Git",
-      "HTML",
-      "CSS",
-      "React",
+      "Python, JavaScript, TypeScript",
+      "React, Remix, HTML, CSS, Tailwind CSS, Sass",
+      "Node.js, Express, Flask, RESTful APIs",
+      "PostgreSQL, MySQL, Prisma ORM",
+      "Jest, React Testing Library, Vitest",
+      "Git, Postman, pgAdmin, Cloudflare CDN, Cloudflare R2",
     ],
   },
 ];
@@ -331,29 +328,38 @@ export const educationItems = [
   {
     degree: "Master of Engineering in Electrical and Computer Engineering",
     institution: "Ontario Tech University",
-    location: "Oshawa, ON",
+    location: "Oshawa, ON, Canada",
     date: "December 2025",
     distinction: "GPA: 4.21 / 4.30",
     coursework: [
+      "Programming Methods & Abstraction",
+      "Foundations of Software Engineering",
       "Engineering Communication and Ethics",
       "Project Management for Engineers",
       "Advanced Engineering Mathematics",
       "Smart Grid Technology",
       "Electric Vehicles",
       "Advanced Optimization",
-      "Pervasive and Mobile Computing",
+      "Pervasive & Mobile Computing",
     ],
-    leadership: {
-      title: "Orientation Leader",
-      detail:
-        "Supported campus-wide onboarding for 2,300+ incoming students during the Fall 2025 multi-day orientation.",
-    },
+    leadership: [
+      {
+        title: "Orientation Leader",
+        detail:
+          "Supported campus-wide onboarding for 2,300+ incoming students during the Fall 2025 multi-day orientation.",
+      },
+      {
+        title: "Engineering Planning Project Team Lead",
+        detail:
+          "Led a 7-member team using the Waterfall methodology to delegate work, run weekly progress meetings, resolve conflicts, and keep deliverables on schedule. Represented the team in meetings with the professor and presented the final plan.",
+      },
+    ],
   },
   {
     degree:
       "Bachelor of Engineering in Electrical Engineering and Management (Honours)",
     institution: "Ontario Tech University",
-    location: "Oshawa, ON",
+    location: "Oshawa, ON, Canada",
     date: "May 2019",
     distinction: "",
     coursework: [
@@ -366,6 +372,13 @@ export const educationItems = [
       "Design Principles & Project Management",
       "Engineering Operations & Project Management",
     ],
+    leadership: [
+      {
+        title: "Capstone Project Team Lead",
+        detail:
+          "Led a 3-person team developing an embedded fault-detection system, built a mobile app for receiving fault notifications, used SQL to manage notification records, and configured IFTTT to automate SMS alerts.",
+      },
+    ],
   },
 ];
 
@@ -374,7 +387,7 @@ export const experienceItems = [
     id: "dobson-partners",
     company: "Dobson Partners",
     legalName: "8906386 Canada Limited",
-    location: "Toronto, ON",
+    location: "Toronto, ON, Canada",
     roles: [
       {
         title: "Full-Stack Software Developer",
@@ -382,19 +395,21 @@ export const experienceItems = [
       },
     ],
     highlights: [
-      "Translated evolving operational requirements from management and cross-functional stakeholders into implemented platform changes, coordinating priorities and documenting delivered work.",
-      "Tested, troubleshot, and refined production workflows involving document handling, identity verification, messaging, and transaction processes based on technical issues and stakeholder feedback.",
-      "Designed structured data and process workflows supporting reliable information handling, secure user operations, and multi-step verification processes.",
+      "Built and delivered full-stack platform features for landlords, tenants, and realtors, covering document management, messaging, identity verification, media uploads, and transaction workflows.",
+      "Tested, troubleshot, and refined production features based on issues and feedback from early-access users, management, marketing, and real estate industry investors.",
+      "Designed Prisma ORM data models and PostgreSQL schemas for users, documents, messages, and verification records, supporting consistent data storage and reliable CRUD operations.",
+      "Developed React and RESTful API workflows for multi-step verification, document management, messaging, authentication, Cloudinary media uploads, and Stripe payment processing.",
+      "Translated UI/UX wireframes and evolving stakeholder requirements into reusable React and Tailwind CSS components, while tracking milestone work in OpenProject and contributing to weekly cross-functional reviews.",
     ],
   },
   {
     id: "ats-group",
     company: "ATS Group Inc.",
     legalName: "",
-    location: "Toronto, ON",
+    location: "Toronto, ON, Canada",
     roles: [
       {
-        title: "Full-Stack Web Application Developer, Freelance",
+        title: "Full-Stack Web Application Developer (Freelance)",
         dates: "Jan 2023 - Aug 2023",
       },
       {
@@ -403,27 +418,28 @@ export const experienceItems = [
       },
     ],
     highlights: [
-      "Worked with management, executives, planners, developers, and clients to translate facilities-management needs into technical requirements and proposed system workflows.",
-      "Identified operational and usability issues across maintenance workflows, contributing improvements that raised post-release client feedback from 3/5 to 5/5.",
-      "Helped define features including GPS tracking, proof-of-work submissions, repair status updates, employee records, maintenance history, reporting, and role-based access controls.",
-      "Created floor-plan mockups in AutoCAD Web and interactive web application prototypes to visualize facilities workflows and support technical demonstrations.",
+      "Raised post-release client feedback scores from 3/5 to 5/5 by identifying major usability pain points with management and clients, then delivering targeted UI/UX improvements across facilities-maintenance workflows.",
+      "Refactored features in a full-stack facilities-maintenance platform, improving employee records, maintenance history, charting, and data-visualization workflows.",
+      "Designed, developed, and deployed a mobile-first client-facing website for All Track System, owning implementation end to end and deploying through AWS CloudFront and Amazon S3.",
+      "Improved front-end quality by implementing automated tests with Jest and React Testing Library and resolving accessibility and Google Search Console issues.",
+      "Built interactive prototypes and created floor-plan mockups in AutoCAD Web to test facilities-management workflows, communicate product concepts, and help define GPS tracking, Google Maps integration, proof-of-work submissions, repair status updates, and role-based access controls.",
       "Led demos, technical presentations, and project discussions to align technical and non-technical stakeholders.",
-      "Designed, tested, and delivered a client-facing web solution from requirements through deployment.",
     ],
   },
   {
     id: "eme-group",
     company: "EME Group Inc.",
     legalName: "",
-    location: "Toronto, ON",
+    location: "Toronto, ON, Canada",
     roles: [
       {
-        title: "Web Developer, Freelance",
+        title: "Web Developer (Freelance)",
         dates: "Nov 2022 - Dec 2022",
       },
     ],
     highlights: [
-      "Built and launched the first client-facing website in more than 20 years for an electrical and mechanical engineering firm, contributing to a reported 200%+ increase in inbound inquiries and continuing to provide occasional domain, hosting, and maintenance support.",
+      "Built and launched the first client-facing website in more than 20 years for an electrical and mechanical engineering firm, contributing to a reported 200%+ increase in inbound inquiries.",
+      "Developed a mobile-responsive website using HTML, CSS, JavaScript, Sass, and the Google Maps API, and continue to provide occasional domain configuration, hosting, and site-maintenance support.",
     ],
   },
 ];

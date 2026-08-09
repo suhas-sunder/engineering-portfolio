@@ -8,7 +8,7 @@ export const siteConfig = {
   phoneDisplay: "(647) 242-2969",
   phoneHref: "tel:+16472422969",
   linkedIn: "https://linkedin.com/in/s-sunder",
-  location: "Toronto, ON",
+  location: "Toronto, ON, Canada",
   mobility: "Open to relocation across Canada & the U.S.",
   availability:
     "Open to relocation across Canada & the U.S. | Open to travel | On-site & hybrid",

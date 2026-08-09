@@ -50,4 +50,19 @@ describe("engineering skills", () => {
       screen.queryByText(/academic|transferable|working exposure/i),
     ).not.toBeInTheDocument();
   });
+
+  it("reflects the current resume software stack without adding categories", () => {
+    expect(
+      screen.getByText("React, Remix, HTML, CSS, Tailwind CSS, Sass"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Node.js, Express, Flask, RESTful APIs"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("PostgreSQL, MySQL, Prisma ORM"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Jest, React Testing Library, Vitest"),
+    ).toBeInTheDocument();
+  });
 });

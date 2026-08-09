@@ -141,7 +141,7 @@ describe("engineering project evidence assets", () => {
 });
 
 describe("engineering education data", () => {
-  it("uses the verified BEng coursework supplied in the current resume", () => {
+  it("preserves the verified BEng coursework", () => {
     const beng = educationItems.find(({ degree }) =>
       degree.startsWith("Bachelor of Engineering"),
     );
@@ -155,6 +155,27 @@ describe("engineering education data", () => {
       "Advanced Control Systems",
       "Design Principles & Project Management",
       "Engineering Operations & Project Management",
+    ]);
+  });
+
+  it("includes the latest MEng coursework and leadership details", () => {
+    const meng = educationItems.find(({ degree }) =>
+      degree.startsWith("Master of Engineering"),
+    );
+
+    expect(meng?.coursework).toEqual(
+      expect.arrayContaining([
+        "Programming Methods & Abstraction",
+        "Foundations of Software Engineering",
+        "Advanced Optimization",
+        "Pervasive & Mobile Computing",
+        "Advanced Engineering Mathematics",
+        "Project Management for Engineers",
+      ]),
+    );
+    expect(meng?.leadership.map(({ title }) => title)).toEqual([
+      "Orientation Leader",
+      "Engineering Planning Project Team Lead",
     ]);
   });
 });

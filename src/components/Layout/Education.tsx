@@ -76,14 +76,21 @@ export default function Education() {
                 </div>
               ) : null}
 
-              {"leadership" in education && education.leadership ? (
-                <div className="mt-7 max-w-4xl border-l-2 border-teal-700 pl-5">
-                  <h4 className="text-base font-bold text-slate-950">
-                    {education.leadership.title}
-                  </h4>
-                  <p className="mt-1 text-base leading-7 text-slate-700">
-                    {education.leadership.detail}
-                  </p>
+              {education.leadership.length > 0 ? (
+                <div className="mt-7 grid max-w-5xl gap-5">
+                  {education.leadership.map((leadership) => (
+                    <div
+                      key={leadership.title}
+                      className="border-l-2 border-teal-700 pl-5"
+                    >
+                      <h4 className="text-base font-bold text-slate-950">
+                        {leadership.title}
+                      </h4>
+                      <p className="mt-1 text-base leading-7 text-slate-700">
+                        {leadership.detail}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               ) : null}
             </article>
